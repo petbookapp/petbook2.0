@@ -3,6 +3,9 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from "react-router-dom"
 import { auth } from '../firebase'
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import "./App.css"
+
 
 export default function Login() {
     const emailRef = useRef();
@@ -30,6 +33,29 @@ export default function Login() {
         setLoading(false)
     }
 
+
+    const signInWithGoogle = ()=> {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            navigate('/');
+          }).catch((error) => {
+            setError(error.email);
+            setError(GoogleAuthProvider.credentialFromError(error));
+        });
+    }
+
+    const signInWithFacebook = ()=> {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            navigate('/');
+          }).catch((error) => {
+            setError(error.email);
+            setError(FacebookAuthProvider.credentialFromError(error));
+        });
+    }
+
     return (
         <>
             <Card>
@@ -45,6 +71,7 @@ export default function Login() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" ref={passwordRef} required />
                         </Form.Group>
+                        <div className= "w-100 text-center mt-2"></div>
                         <Button disabled={loading} className ="w-100" type="submit">
                             Log In
                         </Button>
@@ -52,6 +79,21 @@ export default function Login() {
                     <div className= "w-100 text-center mt-3">
                         <Link to="/forgot-password">Forgot Password?</Link>
                     </div>
+                </Card.Body>
+            </Card>
+            <div className= "w-100 text-center mt-2">
+                or
+            </div>
+            <div className= "w-100 text-center mt-2"></div>
+            <Card>
+                <Card.Body>
+                    <Button onClick={signInWithGoogle} disabled={loading} className ="w-100" type="submit">
+                        Sign In with Google
+                    </Button>
+                    <div className= "w-100 text-center mt-2"></div>
+                    <Button onClick={signInWithFacebook} disabled={loading} className ="w-100" type="submit">
+                        Sign In with Facebook
+                    </Button>
                 </Card.Body>
             </Card>
             <div className= "w-100 text-center mt-2">
