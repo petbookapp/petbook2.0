@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from "react-router-dom"
+import { auth } from '../firebase'
 
 export default function Login() {
     const emailRef = useRef();
@@ -17,10 +18,14 @@ export default function Login() {
         try {
             setError("")
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
+            await login(emailRef.current.value, passwordRef.current.value) 
+            if(!auth.currentUser.emailVerified){
+                setError('Please verify your email before logging in ')
+                throw new error("Exception thrown");
+            }
             navigate('/');
         } catch {
-            setError('Failed to Sign In')
+            
         }
         setLoading(false)
     }
@@ -50,7 +55,7 @@ export default function Login() {
                 </Card.Body>
             </Card>
             <div className= "w-100 text-center mt-2">
-                Don't have an account? <Link to="/signup">Sign Up</Link>
+                Don't have an account? <a href='/signup'>Sign Up</a>
             </div>
         </>
     )

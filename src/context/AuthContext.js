@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../firebase'
+import { Alert } from "react-bootstrap"
 
 const AuthContext = React.createContext()
 
@@ -10,15 +11,59 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const[loading,setLoading] = useState(true)
+    const [error, setError] = useState('')
 
-    function signup(email, password) {
-        return auth.createUserWithEmailAndPassword(email, password)
+    async function signup(email, password) {
+        let userCredential
+        try {
+            userCredential = await auth.createUserWithEmailAndPassword(email, password)
+        } catch (error) {
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                     setError(`The Email ${email} already in use.`)
+                     break
+                case 'auth/invalid-email':
+                     setError(`The Email ${email} is invalid.`)
+                     break
+                case 'auth/operation-not-allowed':
+                     setError(`Sign Up Failed.`)
+                     break
+                case 'auth/weak-password':
+                     setError('Password Must be at least 6 characters long')
+                     break
+                default:
+                     setError(error.message)
+            }
+        }
+        userCredential.user.sendEmailVerification()
+        setError("")
     }
 
-    function login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password)
+    async function login(email, password) {
+        try {
+            await auth.signInWithEmailAndPassword(email, password)
+        } catch (error) {
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    setError(`The Email ${email} is invalid.`)
+                    break
+                case 'auth/user-disabled':
+                    setError(`The ${this.state.email} is disabled.`)
+                    break
+                case 'auth/user-not-found':
+                    setError(`Email Entered Not Found`)
+                    break
+                case 'auth/wrong-password':
+                    setError('Incorrect Password.')
+                    break
+                default:
+                    setError(error.message)
+            }
+            return;
+        }
+        setError("")
     }
-    
+   
     function logout() {
         return auth.signOut()
     }
@@ -45,8 +90,11 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={value}>
-            {!loading && children}
-        </AuthContext.Provider>
+        <>
+            <AuthContext.Provider value={value}>
+                {!loading && children}
+            </AuthContext.Provider>          
+            {error && <Alert varient="danger">{error}</Alert>}
+        </>
     )
 }

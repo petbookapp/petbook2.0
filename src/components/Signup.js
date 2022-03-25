@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
 
 export default function Signup() {
@@ -24,9 +24,9 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-            navigate('/');
+            navigate('/emailverification');
         } catch {
-            setError('Failed to create new user')
+
         }
         setLoading(false)
     }
@@ -57,7 +57,7 @@ export default function Signup() {
                 </Card.Body>
             </Card>
             <div className= "w-100 text-center mt-2">
-                Already have an account? <Link to="/login">Log In</Link>
+                Already have an account? <a href='/login'>Login</a>
             </div>
         </>
     )
