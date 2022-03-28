@@ -24,7 +24,7 @@ function App() {
               <Route exact path="/signup" element={<Signup/>}/>
               <Route exact path="/emailverification" element={<EmailVerification/>}/>
               <Route exact path="/login" element={<Login/>}/>
-              <Route exact path="/forgot-password.html" element={<ForgotPassowrd/>}/>
+              <Route exact path="/forgot-password" element={<ForgotPassowrd/>}/>
             </Routes>
           </AuthProvider>
         </Router>
