@@ -1,17 +1,16 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
 import { useAuth } from '../context/AuthContext'
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { Alert } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import { auth } from '../firebase'
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import "./styles.css"
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 
-export default function Signup() {
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
-    const { signup } = useAuth()
+
+export default function Login() {
+    const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -19,21 +18,21 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if(document.getElementById("password").value !==
-        document.getElementById("confirm-password").value) {
-            return setError('Passwords do not match')
-        }
-        
         try {
             setError("")
             setLoading(true)
-            await signup(document.getElementById("email").value, document.getElementById("password").value)
-            navigate('/emailverification');
+            await login(document.getElementById("email").value, document.getElementById("password").value);
+            if(!auth.currentUser.emailVerified){
+                setError('Please verify your email before logging in ')
+                throw new error("Exception thrown");
+            }
+            navigate('/');
         } catch {
-
+            
         }
         setLoading(false)
     }
+
 
     const signInWithGoogle = ()=> {
         const provider = new GoogleAuthProvider();
@@ -73,9 +72,9 @@ export default function Signup() {
                                     </div>
                                     <div class="card fat">
                                         <div class="card-body">
-                                            <h4 class="card-title">Sign Up</h4>
+                                            <h4 class="card-title">Login</h4>
                                             {error && <Alert varient="danger">{error}</Alert>}
-                                            <form class="signup-form">
+                                            <form class="login-form">
                                                 <div class="form-group">
                                                     <label for="email">Email Address</label>
                                                     <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
@@ -88,20 +87,24 @@ export default function Signup() {
                                                     <label for="password">Password
                                                     </label>
                                                     <input id="password" placeHolder="Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <a href="/forgot-password" class="float-right">
+                                                        Forgot Password?
+                                                    </a>
                                                     <div class="invalid-feedback">
                                                         Password is required
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="password">Confirm Password
-                                                    </label>
-                                                    <input id="confirm-password" placeHolder="Confirm Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input type="checkbox" name="remember" id="remember" class="custom-control-input"/>
+                                                        <label for="remember" class="custom-control-label">Remember Me</label>
+                                                    </div>
                                                 </div>
 
                                                 <div class="form-group m-0">
-                                                    <button type="submit" onClick={handleSubmit} class="btn btn-primary btn-block">
-                                                        <span>Sign Up</span>
+                                                    <button type="submit" disabled={loading} onClick={handleSubmit} class="btn btn-primary btn-block">
+                                                        <span>Login</span>
                                                     </button>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2">
@@ -109,14 +112,15 @@ export default function Signup() {
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group ">
-                                                    <FacebookLoginButton style={{ width:310,height:50}} text='Sign Up with Facebook' onClick={signInWithFacebook} className="stylefacebookButton"/> 
+                                                    <FacebookLoginButton style={{ width:310,height:50}} disabled={loading} onClick={signInWithFacebook} className="stylefacebookButton"/>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group m-0">
-                                                    <GoogleButton style={{ width:310,height:50}} label='Sign Up with Google' onClick={signInWithGoogle} className="stylegoogleButton"/>
+                                                    <GoogleButton style={{ width:310,height:50}} type="dark" disabled={loading} onClick={signInWithGoogle} className="stylegoogleButton"/>
+                                                    
                                                 </div>
                                                 <div class="mt-4 text-center">
-                                                    Already have an account? <a href="/login">Sign In</a>
+                                                    Don't have an account? <a href="/signup">Sign Up</a>
                                                 </div>
                                             </form>
                                         </div>

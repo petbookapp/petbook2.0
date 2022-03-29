@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
 
 body {
     background: url(background.png) no-repeat center center fixed !important; 
@@ -7,251 +8,216 @@ body {
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
     background-size: cover !important;
-    display: flex !important;
-	justify-content: center !important;
-	align-items: center !important;
-	flex-direction: column !important;
-	font-family: 'Montserrat', sans-serif !important;
-	height: 100vh !important;
-	margin: -20px 0 50px !important;
 }
 
-
-* {
-	box-sizing: border-box !important;
-}
-
-
-h1 {
-	font-weight: bold !important;
-	margin: 0 !important;
-}
-
-h2 {
-	text-align: center !important;
-}
-
-p {
-	font-size: 14px !important;
-	font-weight: 100 !important;
-	line-height: 20px !important;
-	letter-spacing: 0.5px !important;
-	margin: 20px 0 30px !important;
-}
-
-span {
-	font-size: 12px !important;
-}
-
-a {
-	color: #333 !important;
-	font-size: 14px !important;
-	text-decoration: none !important;
-	margin: 15px 0 !important;
-}
-
-button {
-	border-radius: 20px !important;
-	border: 1px solid #ff00ff !important;
-	background-color: #ff00dd !important;
-	color: #FFFFFF !important;
-	font-size: 12px !important;
-	font-weight: bold !important;
-	padding: 12px 45px !important;
-	letter-spacing: 1px !important;
-	text-transform: uppercase !important;
-	transition: transform 80ms ease-in !important;
-}
-
-button:active {
-	transform: scale(0.95) !important;
-}
-
-button:focus {
-	outline: none !important;
-}
-
-button.ghost {
-	background-color: transparent !important;
-	border-color: #FFFFFF !important;
-}
-
-form {
-	background-color: #FFFFFF !important;
-	display: flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	flex-direction: column !important;
-	padding: 0 50px !important;
+html {
 	height: 100% !important;
-	text-align: center !important;
 }
 
-input {
-	background-color: #eee !important;
-	border: none !important;
-	padding: 12px 15px !important;
-	margin: 8px 0 !important;
-	width: 100% !important;
+body.my-login-page {
+	background-color: #f7f9fb !important;
+	font-size: 14px !important;
 }
 
-.container {
-	background-color: #fff !important;
-	border-radius: 10px !important;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22) !important;
-	position: relative !important;
+.my-login-page .brand {
+	width: 200px !important;
+	height: 80px !important;
 	overflow: hidden !important;
-	width: 768px !important;
-	max-width: 100% !important;
-	min-height: 480px !important;
-}
-
-.form-container {
-	position: absolute !important;
-	top: 0 !important;
-	height: 100% !important;
-	transition: all 0.6s ease-in-out !important;
-}
-
-.sign-in-container {
-	left: 0 !important;
-	width: 50% !important;
-	z-index: 2 !important;
-}
-
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%) !important;
-}
-
-.sign-up-container {
-	left: 0 !important;
-	width: 50% !important;
-	opacity: 0 !important;
+	border-radius: 50% !important;
+	margin: 1px auto !important;
+	position: relative !important;
 	z-index: 1 !important;
 }
 
-.container.right-panel-active .sign-up-container {
-	transform: translateX(100%) !important;
-	opacity: 1 !important;
-	z-index: 5 !important;
-	animation: show 0.6s !important;
+.my-login-page .brand img {
+	width: 100% !important;
+    height: 100% !important;
 }
 
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0 !important;
-		z-index: 1 !important;
-	}
-	
-	50%, 100% {
-		opacity: 1 !important;
-		z-index: 5 !important;
-	}
+.my-login-page .card-wrapper {
+	width: 400px !important;
 }
 
-.overlay-container {
-	position: absolute !important;
-	top: 0 !important;
-	left: 50% !important;
-	width: 50% !important;
-	height: 100% !important;
-	overflow: hidden !important;
-	transition: transform 0.6s ease-in-out !important;
-	z-index: 100 !important;
+.my-login-page .card {
+	border-color: transparent !important;
+	box-shadow: 0 4px 8px rgba(0,0,0,.05) !important;
 }
 
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%) !important;
+.my-login-page .card.fat {
+	padding: 10px !important;
 }
 
-.overlay {
-	background: #FF416C !important;
-	background: linear-gradient(to right, #ffc400, #ff00dd) !important;
-	background-repeat: no-repeat !important;
-	background-size: cover !important;
-	background-position: 0 0 !important;
-	color: #FFFFFF !important;
-	position: relative !important;
-	left: -100% !important;
-	height: 100% !important;
-	width: 200% !important;
-  	transform: translateX(0) !important;
-	transition: transform 0.6s ease-in-out !important;
+.my-login-page .card .card-title {
+	margin-bottom: 30px !important;
 }
 
-.container.right-panel-active .overlay {
-  	transform: translateX(50%) !important;
+.my-login-page .form-control {
+	border-width: 2.3px !important;
 }
 
-.overlay-panel {
-	position: absolute !important;
-	display: flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	flex-direction: column !important;
-	padding: 0 40px !important;
+.my-login-page .form-group label {
+	width: 100% !important;
+}
+
+.my-login-page .btn.btn-block {
+	padding: 13px 10px !important;
+}
+
+.my-login-page .footer {
+	margin: 40px 0 !important;
+	color: #888 !important;
 	text-align: center !important;
-	top: 0 !important;
-	height: 100% !important;
-	width: 50% !important;
-	transform: translateX(0) !important;
-	transition: transform 0.6s ease-in-out !important;
 }
 
-.overlay-left {
-	transform: translateX(-20%) !important;
+@media screen and (max-width: 425px) {
+	.my-login-page .card-wrapper {
+		width: 90% !important;
+		margin: 0 auto !important;
+	}
 }
 
-.container.right-panel-active .overlay-left {
-	transform: translateX(0) !important;
+@media screen and (max-width: 320px) {
+	.my-login-page .card.fat {
+		padding: 0 !important;
+	}
+
+	.my-login-page .card.fat .card-body {
+		padding: 15px !important;
+	}
 }
 
-.overlay-right {
-	right: 0 !important;
-	transform: translateX(0) !important;
-}
+.button_container {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 30% !important;
+  }
+  
+  .description, .link {
+    font-family: 'Amatic SC', cursive !important;
+    text-align: center !important;
+  }
+  
+  .description {
+    font-size: 35px !important;
+  }
+  
+  .btn {
+    border: none !important;
+    display: block !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    outline: none !important;
+    overflow: hidden !important;
+    position: relative !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    background-color: #3A405A !important;
+    padding: 17px 60px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.20) !important;
+  }
+  
+  .btn span {
+    position: relative !important; 
+    z-index: 1 !important;
+  }
+  
+  .btn:after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 490% !important;
+    width: 140% !important;
+    background: #0991e0 !important;
+    -webkit-transition: all .5s ease-in-out !important;
+    transition: all .5s ease-in-out !important;
+    -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg) !important;
+    transform: translateX(-98%) translateY(-25%) rotate(45deg) !important;
+  }
+  
+  .btn:hover:after {
+    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg) !important;
+    transform: translateX(-9%) translateY(-25%) rotate(45deg) !important;
+  }
+  
+  .link {
+    font-size: 20px !important;
+    margin-top: 30px !important;
+  }
+  
+  .link a {
+    color: #000 !important;
+    font-size: 25px !important; 
+  }
 
-.container.right-panel-active .overlay-right {
-	transform: translateX(20%) !important;
-}
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+  
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.7;
+  }
+  
+  /* Set a specific color for each brand */
+  
+  /* Facebook */
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  /* Twitter */
+  .fa-google {
+    background: #ff0000;
+    color: rgb(255, 255, 255);
+  }
 
-.social-container {
-	margin: 20px 0 !important;
+  .social-container {
+	margin: 20px 0;
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD !important;
-	border-radius: 50% !important;
-	display: inline-flex !important;
-	justify-content: center !important;
-	align-items: center !important;
-	margin: 0 5px !important;
-	height: 40px !important;
-	width: 40px !important;
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
 }
 
-footer {
-    background-color: #222 !important;
-    color: #fff !important;
-    font-size: 14px !important;
-    bottom: 0 !important;
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    text-align: center !important;
-    z-index: 999 !important;
+.stylegoogleButton {
+    margin:5px;
+    width: 300px;
+    height:35px;
+    border-radius: 4px;
+    background-image: #db3236;
+    color:white;
+    border:0px transparent;
+    text-align: right;
+    margin: 0 auto;
+    width: 100%;
 }
 
-footer p {
-    margin: 10px 0 !important;
-}
-
-footer i {
-    color: red !important;
-}
-
-footer a {
-    color: #3c97bf !important;
-    text-decoration: none !important;
+.stylefacebookButton {
+    margin:5px;
+    width: 300px;
+    height:35px;
+    border-radius: 4px;
+    background-image: #db3236;
+    color:white;
+    border:0px transparent;
+    text-align: right;
+    margin: 0 auto;
+    width: 100%;
 }

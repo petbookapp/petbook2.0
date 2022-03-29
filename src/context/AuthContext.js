@@ -191,8 +191,8 @@ export function AuthProvider({ children }) {
         <>
             <AuthContext.Provider value={value}>
                 {!loading && children}
+                {error && <Alert varient="danger">{error}</Alert>}
             </AuthContext.Provider>          
-            {error && <Alert varient="danger">{error}</Alert>}
         </>
     )
 }
