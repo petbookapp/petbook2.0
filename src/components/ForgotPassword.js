@@ -41,7 +41,7 @@ export default function ForgotPassowrd() {
                                     </div>
                                     <div class="card fat">
                                         <div class="card-body">
-                                            <h4 class="card-title">Password Reset</h4>
+                                            <h4 class="card-title">Change Password</h4>
                                             {error && <Alert varient="danger">{error}</Alert>}
                                             {message && <Alert varient="success">{message}</Alert>}
                                             <Form onSubmit={handleSubmit}>
