@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom"
 import firebase from 'firebase/compat/app'
 import app from '../firebase'
 import { auth } from '../firebase'
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, getAdditionalUserInfo } from "firebase/auth";
 import "./styles.css"
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { onAuthStateChanged } from "firebase/auth";
+import { getDatabase, set, ref } from 'firebase/database';
 
 
 export default function Login() {
@@ -16,7 +18,32 @@ export default function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    const database = firebase.database(app)
+    const database = getDatabase();
+
+    function writeUserData(userId, name, email) {
+        set(ref(database, 'User UID/' + userId), {
+          username: name,
+          email: email,
+        });
+    }
+    onAuthStateChanged(auth, (user) => {
+        console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
+        if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
+        {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                writeUserData(uid, "322332", user.email)
+                
+              } else {
+                // User is signed out
+                // ...
+              }
+
+        }
+
+      });
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -47,7 +74,7 @@ export default function Login() {
           }).catch((error) => {
             setError(error.email);
             setError(GoogleAuthProvider.credentialFromError(error));
-        });
+        }).then();
     }
 
     const signInWithFacebook = ()=> {

@@ -31,7 +31,7 @@ export default function Signup() {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           const uid = user.uid;
-          writeUserData(uid, 'bob', user.email)
+          writeUserData(uid, "bob", user.email)
           
         } else {
           // User is signed out
