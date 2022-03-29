@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import firebase from 'firebase/compat/app'
+import app from '../firebase'
 import { auth } from '../firebase'
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import "./styles.css"
@@ -14,6 +16,7 @@ export default function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const database = firebase.database(app)
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -21,11 +24,13 @@ export default function Login() {
         try {
             setError("")
             setLoading(true)
+            // const data = {"Email"}
             await login(document.getElementById("email").value, document.getElementById("password").value);
             if(!auth.currentUser.emailVerified){
                 setError('Please verify your email before logging in ')
                 throw new error("Exception thrown");
             }
+            // database.ref().push();
             navigate('/');
         } catch {
             

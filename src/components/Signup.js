@@ -3,9 +3,11 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import { auth } from '../firebase'
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { auth, } from '../firebase'
+import { onAuthStateChanged } from "firebase/auth";
+import { getDatabase, set, ref } from 'firebase/database'
 
 export default function Signup() {
     const emailRef = useRef();
@@ -15,7 +17,27 @@ export default function Signup() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const database = getDatabase();
+    
 
+    function writeUserData(userId, name, email) {
+        set(ref(database, 'User UID/' + userId), {
+          username: name,
+          email: email,
+        });
+    }
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          writeUserData(uid, 'bob', user.email)
+          
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -24,10 +46,21 @@ export default function Signup() {
             return setError('Passwords do not match')
         }
         
+
+
         try {
             setError("")
             setLoading(true)
-            await signup(document.getElementById("email").value, document.getElementById("password").value)
+            var email = document.getElementById("email").value; 
+            await signup(email, document.getElementById("password").value
+            )
+            // .then(function () 
+            //     {
+            //         return writeUserData(auth.currentUser.id, 'bob', email)
+            //     }
+            // )
+            // alert(auth.currentUser.id);
+
             navigate('/emailverification');
         } catch {
 
