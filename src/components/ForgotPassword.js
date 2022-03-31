@@ -44,15 +44,15 @@ export default function ForgotPassowrd() {
                                             {error && <Alert varient="danger">{error}</Alert>}
                                             {message && <Alert varient="success">{message}</Alert>}
                                             <Form onSubmit={handleSubmit}>
-                                            <Form.Group id ="email">
-                                                <Form.Label>Please enter your email</Form.Label>
-                                                <Form.Control placeHolder="Email" type="email" ref={emailRef} required />
-                                            </Form.Group>
-                                            <div className= "w-100 text-center mt-2"></div> 
-                                            <Button disabled={loading} className ="w-100" type="submit">
-                                                <span>Reset Password</span>
-                                            </Button>
-                                        </Form>
+                                                <Form.Group id ="email">
+                                                    <Form.Label>Please enter your email</Form.Label>
+                                                    <Form.Control placeHolder="Email" type="email" ref={emailRef} required />
+                                                </Form.Group>
+                                                <div className= "w-100 text-center mt-2"></div> 
+                                                <Button disabled={loading} className ="w-100" type="submit">
+                                                    <span>Reset Password</span>
+                                                </Button>
+                                            </Form>
                                             <form class="signup-form">
                                                 <div class="mt-4 text-center">
                                                    Return to <a href="/login">Login</a>
