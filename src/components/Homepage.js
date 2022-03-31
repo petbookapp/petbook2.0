@@ -38,13 +38,18 @@ export default function Homepage() {
         </body>
       </main>
       <Card.Body>
-        <h2 className="text-center mb-4">Profile</h2>
+        <h2 style={{ fontSize: 25 }} className="text-center mb-4">{currentUser.email}</h2>
         {error && <Alert varient="danger">{error}</Alert>}
-        <strong>User Logged In: </strong>{currentUser.email}
+        <div class="pet-container">
+          <div class="pet-card">
+            <img src="https://www.petmd.com/sites/default/files/2020-11/picture-of-golden-retriever-dog_0.jpg" alt="Chyno Deluxe"/>
+            <h1>Max</h1>
+            <h2>Golden Retriever 10</h2>
+            <a class="button" href="/" ><span>+</span> View</a>
+          </div>
+        </div>
       </Card.Body>
-      <div className="w-100 text-center mt-2">
-        <Button onClick={handleLogout} className ="w-100" type="submit"><span>Logout</span></Button>
-      </div>
+      
     </>
   )
 }
