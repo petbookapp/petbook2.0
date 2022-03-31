@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import React, { useState } from "react"
+import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
@@ -10,9 +10,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { getDatabase, set, ref } from 'firebase/database'
 
 export default function Signup() {
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -96,7 +93,7 @@ export default function Signup() {
             <head>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
             </head>
-                <body class="my-login-page">
+                <body class="login-form">
                     <section class="h-100">
                         <div class="container h-100">
                             <div class="row justify-content-md-center h-100">
@@ -133,7 +130,7 @@ export default function Signup() {
                                                 </div>
 
                                                 <div class="form-group m-0">
-                                                    <button type="submit" onClick={handleSubmit} class="btn btn-primary btn-block">
+                                                    <button type="submit" disabled={loading} onClick={handleSubmit} class="btn btn-primary btn-block">
                                                         <span>Sign Up</span>
                                                     </button>
                                                 </div>

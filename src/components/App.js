@@ -9,6 +9,9 @@ import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassowrd from "./ForgotPassword"
 import EmailVerification from "./EmailVerification"
+import PetInfo from "./PetInfo"
+import Account from "./Account"
+import About from "./AboutUs"
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
               <Route exact path="/emailverification" element={<EmailVerification/>}/>
               <Route exact path="/login" element={<Login/>}/>
               <Route exact path="/forgot-password" element={<ForgotPassowrd/>}/>
+              <Route exact path="/pet-info" element={<PetInfo/>}/>
+              <Route exact path="/account" element={<Account/>}/>
+              <Route exact path="/about" element={<About/>}/>
             </Routes>
           </AuthProvider>
         </Router>

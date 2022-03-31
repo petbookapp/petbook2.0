@@ -2,11 +2,8 @@ import React, { useState } from "react"
 import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import firebase from 'firebase/compat/app'
-import app from '../firebase'
 import { auth } from '../firebase'
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, getAdditionalUserInfo } from "firebase/auth";
-import "./styles.css"
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
@@ -94,7 +91,7 @@ export default function Login() {
             <head>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
             </head>
-                <body class="my-login-page">
+                <body class="login-form">
                     <section class="h-100">
                         <div class="container h-100">
                             <div class="row justify-content-md-center h-100">

@@ -14,12 +14,12 @@ html {
 	height: 100% !important;
 }
 
-body.my-login-page {
+body.login-form {
 	background-color: #f7f9fb !important;
 	font-size: 14px !important;
 }
 
-.my-login-page .brand {
+.login-form .brand {
 	width: 200px !important;
 	height: 80px !important;
 	overflow: hidden !important;
@@ -29,59 +29,59 @@ body.my-login-page {
 	z-index: 1 !important;
 }
 
-.my-login-page .brand img {
+.login-form .brand img {
 	width: 100% !important;
     height: 100% !important;
 }
 
-.my-login-page .card-wrapper {
+.login-form .card-wrapper {
 	width: 400px !important;
 }
 
-.my-login-page .card {
+.login-form .card {
 	border-color: transparent !important;
 	box-shadow: 0 4px 8px rgba(0,0,0,.05) !important;
 }
 
-.my-login-page .card.fat {
+.login-form .card.fat {
 	padding: 10px !important;
 }
 
-.my-login-page .card .card-title {
+.login-form .card .card-title {
 	margin-bottom: 30px !important;
 }
 
-.my-login-page .form-control {
+.login-form .form-control {
 	border-width: 2.3px !important;
 }
 
-.my-login-page .form-group label {
+.login-form .form-group label {
 	width: 100% !important;
 }
 
-.my-login-page .btn.btn-block {
+.login-form .btn.btn-block {
 	padding: 13px 10px !important;
 }
 
-.my-login-page .footer {
+.login-form .footer {
 	margin: 40px 0 !important;
 	color: #888 !important;
 	text-align: center !important;
 }
 
 @media screen and (max-width: 425px) {
-	.my-login-page .card-wrapper {
+	.login-form .card-wrapper {
 		width: 90% !important;
 		margin: 0 auto !important;
 	}
 }
 
 @media screen and (max-width: 320px) {
-	.my-login-page .card.fat {
+	.login-form .card.fat {
 		padding: 0 !important;
 	}
 
-	.my-login-page .card.fat .card-body {
+	.login-form .card.fat .card-body {
 		padding: 15px !important;
 	}
 }
@@ -102,6 +102,7 @@ body.my-login-page {
     font-size: 35px !important;
   }
   
+
   .btn {
     border: none !important;
     display: block !important;
@@ -221,3 +222,92 @@ body.my-login-page {
     margin: 0 auto;
     width: 100%;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+main {
+  .sidebar {
+    left: 0;
+    position: fixed !important;
+    width: 13% !important;
+    height: 100vh !important;
+    background: #3A405A !important;
+    font-size: 0.65em !important;
+  }
+  
+  .user-text {
+    font-size: 1em !important;
+  }
+
+  .nav {
+    position: relative !important;
+    margin: 0 13% !important;
+    text-align: right !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-weight: bold !important;
+  }
+  
+  .nav ul {
+    list-style: none !important;
+    
+    li {
+      position: relative !important;
+      margin: 3.2em 0 !important;
+
+      button {
+        border: none !important;
+        display: block !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        text-transform: uppercase !important;
+        outline: none !important;
+        overflow: hidden !important;
+        position: relative !important;
+        color: #fff !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        background-color: #000 !important;
+        padding: 17px 25px !important;
+        margin: 0 auto !important;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.20) !important;
+      }
+
+      a {
+        line-height: 5em !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        letter-spacing: 0.4em !important;
+        color: rgba(rgb(255, 255, 255), 0.65) !important;
+        display: block !important;
+        transition: all ease-out 300ms !important;
+      }
+      
+      &.active a {
+        color: rgb(255, 255, 255) !important;
+      }
+      
+      &:not(.active)::after {
+        opacity: 0.2 !important;
+      }
+      
+      &:not(.active):hover a {
+        color: rgba(rgb(255, 255, 255), 1.0) !important;
+      }
+      
+      &::after {
+        content: '' !important;
+        position: absolute !important;
+        width: 100% !important;
+        height: 0.2em !important;
+        background: rgb(255, 255, 255) !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        background-image: linear-gradient(to right, #5e42a6, #b74e91) !important;
+      }
+    }
+  }
+  
+  
+}
+
