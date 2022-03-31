@@ -5,23 +5,36 @@ import { useAuth } from '../context/AuthContext'
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
-import { auth, } from '../firebase'
+import { auth, database} from '../firebase'
 import { onAuthStateChanged } from "firebase/auth";
-import { getDatabase, set, ref } from 'firebase/database'
+import { set, ref } from 'firebase/database'
+import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
+
 
 export default function Signup() {
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
-    const database = getDatabase();
+    const navigate = useNavigate();
     
 
     function writeUserData(userId, name, email) {
-        set(ref(database, 'User UID/' + userId), {
-          username: name,
-          email: email,
-        });
+        try {
+            const docRef = setDoc(doc(collection(database, "users"), userId), {
+                name: "blafsdfs",
+                email: email,
+                ID: userId,
+            });
+
+
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        // set(ref(database, 'User UID/' + userId), {
+        //   username: name,
+        //   email: email,
+        // });
     }
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -42,9 +55,6 @@ export default function Signup() {
         document.getElementById("confirm-password").value) {
             return setError('Passwords do not match')
         }
-        
-
-
         try {
             setError("")
             setLoading(true)
