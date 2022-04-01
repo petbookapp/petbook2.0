@@ -41,38 +41,37 @@ export default function PetInfo(){
       }, [])
  
     return (
-            <>
-            <main class="main">
-            <body>
-                <aside class="sidebar">
-                    <nav class="nav">
-                    <ul>
-                        <li><a href="/">Your Pets</a></li>
-                        <li class="active"><a href="/add-pet">Add Pet</a></li>
-                        <li><a href="/account">Account</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
-                    </ul>
-                    </nav>
-                </aside>
-                </body>
-                <Card.Body style={{minHeight: "100%"}}class="nicebackground pet-info-container">
-                <h1 class="pet-name">{petData.name}</h1>
-                  <table>
-                    <tr>
-                      <td>Name: </td>
-                      <td><p class="pet-breed">{petData.name}</p></td>
-                    </tr>
-                    <tr>
-                      <td>Food:</td>
-                      <td><p class="pet-age">{petData.age}</p></td>
-                      <td><p class="pet-age">{petData.food}</p></td>
-                    </tr>
-                  <p class="pet-age">{petData.walkTime}</p>
-                  </table>
-                </Card.Body>
- 
-            </main>
-            </>
+      <>
+      <main class="main">
+      <body>
+          <aside class="sidebar">
+              <nav class="nav">
+              <ul>
+                  <li><a href="/">Your Pets</a></li>
+                  <li><a href="/add-pet">Add Pet</a></li>
+                  <li><a href="/account">Account</a></li>
+                  <li class="active"><a href="/about">About Us</a></li>
+                  <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
+              </ul>
+              </nav>
+          </aside>
+          </body>
+      </main>
+      <body style={{minHeight: "100vh"}} class="nicebackground d-flex allign-items-center justify-content-center">
+      <h1 class="pet-name">{petData.name}</h1>
+        <table>
+          <tr>
+            <td>Name: </td>
+            <td><p class="pet-breed">{petData.name}</p></td>
+          </tr>
+          <tr>
+            <td>Food:</td>
+            <td><p class="pet-age">{petData.age}</p></td>
+            <td><p class="pet-age">{petData.food}</p></td>
+          </tr>
+        <p class="pet-age">{petData.walkTime}</p>
+        </table>
+      </body>
+    </>
     )
 }
