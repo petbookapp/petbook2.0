@@ -46,7 +46,7 @@ export default function Account(){
                     <nav class="nav">
                     <ul>
                         <li><a href="/">Your Pets</a></li>
-                        <li><a href="/pet-info">Pet Info</a></li>
+                        <li><a href="/add-pet">Add Pet</a></li>
                         <li class="active"><a href="/account">Account</a></li>
                         <li><a href="/about">About Us</a></li>
                         <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
@@ -55,15 +55,12 @@ export default function Account(){
                 </aside>
                 </body>
             </main>
-            <body class="my-login-page">
+            <body class="login-form nicebackground">
             <h2 style={{ fontSize: 25 }} className="text-center mb-4">Email: {currentUser.email}</h2>
                     <section class="h-100">
                         <div class="container h-100">
                             <div class="row justify-content-md-center h-100">
                                 <div class="card-wrapper">
-                                    <div class="brand">
-                                        <img src="logo.png" alt="logo"/>
-                                    </div>
                                     <div class="card fat">
                                         <div class="card-body">
                                             <h4 class="card-title">Change Password</h4>
@@ -79,11 +76,6 @@ export default function Account(){
                                                     <span>Reset Password</span>
                                                 </Button>
                                             </Form>
-                                            <form class="signup-form">
-                                                <div class="mt-4 text-center">
-                                                   Return to <a href="/login">Login</a>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>

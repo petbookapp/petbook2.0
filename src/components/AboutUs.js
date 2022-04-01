@@ -19,22 +19,25 @@ export default function About(){
       }
 
     return (
-            <>
-            <main class="main">
-            <body>
-                <aside class="sidebar">
-                    <nav class="nav">
-                    <ul>
-                        <li><a href="/">Your Pets</a></li>
-                        <li><a href="/pet-info">Pet Info</a></li>
-                        <li><a href="/account">Account</a></li>
-                        <li class="active"><a href="/about">About Us</a></li>
-                        <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
-                    </ul>
-                    </nav>
-                </aside>
-                </body>
-            </main>
-            </>
+      <>
+        <main class="main">
+        <body>
+            <aside class="sidebar">
+                <nav class="nav">
+                <ul>
+                    <li><a href="/">Your Pets</a></li>
+                    <li><a href="/add-pet">Add Pet</a></li>
+                    <li><a href="/account">Account</a></li>
+                    <li class="active"><a href="/about">About Us</a></li>
+                    <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
+                </ul>
+                </nav>
+            </aside>
+            </body>
+        </main>
+        <body style={{minHeight: "100vh"}} class="nicebackground">
+            <p class="d-flex allign-items-center justify-content-center">Add About us stuff</p>
+        </body>
+      </>
     )
 }
