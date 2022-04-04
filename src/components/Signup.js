@@ -9,6 +9,7 @@ import { auth, database} from '../firebase'
 import { onAuthStateChanged } from "firebase/auth";
 import { set, ref } from 'firebase/database'
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
+import { writeUserData } from "./API";
 
 
 export default function Signup() {
@@ -16,26 +17,7 @@ export default function Signup() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-    
-
-    function writeUserData(userId, name, email) {
-        try {
-            const docRef = setDoc(doc(collection(database, "users"), userId), {
-                name: "blafsdfs",
-                email: email,
-                ID: userId,
-            });
-
-
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
-        // set(ref(database, 'User UID/' + userId), {
-        //   username: name,
-        //   email: email,
-        // });
-    }
+   
     onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties

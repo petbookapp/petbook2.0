@@ -2,13 +2,12 @@ import React, { useState } from "react"
 import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { auth, database} from '../firebase'
+import { auth } from '../firebase'
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
-import { getDatabase, set, ref } from 'firebase/database';
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
+import { writeUserData } from "./API";
 
 
 export default function Login() {
@@ -17,31 +16,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-    function writeUserData(userId, name, email) {
-        try {
-            // doc(database, "users", "SF");
-            // const docRef = setDoc(collection(database, "users"), {
-            //   name: "Ada",
-            //   email: email,
-            //   ID: userId
-            // });
-
-            const docRef = setDoc(doc(collection(database, "users"), userId), {
-                name: "blafsdfs",
-                email: email,
-                ID: userId,
-            });
-
-
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
-        // set(ref(database, 'User UID/' + userId), {
-        //   username: name,
-        //   email: email,
-        // });
-    }
     onAuthStateChanged(auth, (user) => {
         // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
         if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)

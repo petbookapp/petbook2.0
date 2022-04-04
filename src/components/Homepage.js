@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Card, Button, Alert } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { auth, database} from '../firebase'
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { auth } from '../firebase'
+import { writeUserData } from "./API";
 
 
 export default function Homepage() {
@@ -11,26 +11,6 @@ export default function Homepage() {
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   const user = auth.currentUser;
-  
-  function writeUserData(pAge, pType, pBreed, pName) {
-    try {
-        const docRef = setDoc(doc(collection(database, "pets"), user), {
-            name: pName,
-            age: pAge,
-            type: pType,
-            breed: pBreed
-        });
-
-
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-    // set(ref(database, 'User UID/' + userId), {
-    //   username: name,
-    //   email: email,
-    // });
-}
 
   async function handleLogout() {
     setError('')
