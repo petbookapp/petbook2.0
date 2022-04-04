@@ -3,14 +3,13 @@ import 'firebase/compat/auth';
 import {getFirestore} from "firebase/firestore";
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyByhVDppQflaACGxE0TK45KEAHWh7ASv6I",
-    authDomain: "group1-3548e.firebaseapp.com",
-    databaseURL: "https://group1-3548e-default-rtdb.firebaseio.com",
-    projectId: "group1-3548e",
-    storageBucket: "group1-3548e.appspot.com",
-    messagingSenderId: "513050052130",
-    appId: "1:513050052130:web:d40afad04639e68fd7ac7b",
-    measurementId: "G-JV72FRF550"
+    apiKey: "AIzaSyBkb07TikkGrdL7uNrvJZQ_yeOYHyqxSCw",
+    authDomain: "snout-371aa.firebaseapp.com",
+    projectId: "snout-371aa",
+    storageBucket: "snout-371aa.appspot.com",
+    messagingSenderId: "228922545435",
+    appId: "1:228922545435:web:509c75422ba561c8ba6fbe",
+    measurementId: "G-ZMT5W1X5BQ"
   });
 
   export const auth = app.auth();
