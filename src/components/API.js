@@ -1,13 +1,14 @@
 import { collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import { auth, database} from '../firebase';
 
-export function writePetData(userId, pAge, pType, pBreed, pName) {
+export function writePet(userId, pAge, pType, pBreed, pName) {
     try {
         const docRef = setDoc(doc(collection(database, "pets"), userId), {
             name: pName,
             age: pAge,
             type: pType,
             breed: pBreed
+            
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
