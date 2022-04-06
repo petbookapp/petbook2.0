@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { writePet } from './API'
 
 export default function AddPet(){
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
     async function handleLogout() {
         setError('')
@@ -17,6 +19,21 @@ export default function AddPet(){
           setError('Logout failed')
         }
       }
+
+      async function handleAddPet(e) {
+        e.preventDefault()
+
+        try {
+            setError("")
+            setLoading(true)
+            writePet("blaf", "blaf", "blaf", "blaf", "blaf");
+
+            // navigate('/');
+        } catch {
+            
+        }
+        setLoading(false)
+    }
 
     return (
             <>
@@ -37,6 +54,11 @@ export default function AddPet(){
             </main>
             <body style={{minHeight: "100vh"}} class="nicebackground">
                 <p class="d-flex allign-items-center justify-content-center">Add pet stuff</p>
+                <div class="form-group m-0">
+                  <button type="submit" disabled={loading} onClick={handleAddPet} class="btn btn-primary btn-block">
+                      <span>Login</span>
+                  </button>
+                </div>
             </body>
             </>
     )

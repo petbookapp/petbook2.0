@@ -7,29 +7,15 @@ import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "fireb
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
-<<<<<<< HEAD
 import { writeUserData } from "./API";
-=======
-import { getDatabase, set, ref } from 'firebase/database';
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
 
 
 export default function Login() {
     const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
-    const database = getDatabase();
+    const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
-    function writeUserData(userId, name, email) {
-        set(ref(database, 'User UID/' + userId), {
-          username: name,
-          email: email,
-        });
-    }
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
     onAuthStateChanged(auth, (user) => {
         // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
         if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
