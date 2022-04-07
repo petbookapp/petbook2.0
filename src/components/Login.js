@@ -7,7 +7,6 @@ import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "fireb
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
-import { writeUserData } from "./API";
 import { getDatabase, set, ref } from 'firebase/database';
 
 
