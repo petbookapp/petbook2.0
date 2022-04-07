@@ -1,27 +1,35 @@
-import { collection, addDoc, doc, getDoc, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
+import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import { auth, database} from '../firebase';
+
 
 export function writePet(userId, pAge, pType, pBreed, pName) {
     try {
-        const docRef = setDoc(doc(collection(database, "pets"), userId), {
-            name: pName,
-            age: pAge,
-            type: pType,
-            breed: pBreed
-            
-        });
+
+      const docRef = addDoc(collection(database, "pets"), {
+        petAge: pAge,
+        petName: pName,
+        petPhoto: "",
+        petType: pType,
+        petBreed: pBreed,
+        userAssociation: userId,
+      }); 
+
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
 }
 
-export function writeUserData(userId, name, email) {
+export function writeUserData(user, name, email) {
     try {
-        const docRef = setDoc(doc(collection(database, "users"), userId), {
-            name: "",
-            email: email,
-            ID: userId,
+        const docRef = setDoc(doc(collection(database, "users"), user.uid), {
+          bio: "",
+          created_time: user.metadata.creationTime,          
+          display_name: name,
+          email: email,
+          phone_number: "123456789",
+          photo_url: "",
+          uid: user.uid,
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -66,4 +74,17 @@ export function deletePet(userId, pName) {
       } catch (e) {
         console.error("Error deletign document: ", e);
       }
+}
+
+export function getPets(userId) {
+  try {
+      const q = query(doc(collection(database, "pets"), userId));
+      const querySnapshot = getDocs(q);
+      querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+        });
+
+    } catch (e) {
+      console.error("Error deletign document: ", e);
+    }
 }

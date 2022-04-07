@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Alert } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+<<<<<<< HEAD
 import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
  
+=======
+import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { auth } from '../firebase'
+import { writeUserData } from "./API";
+>>>>>>> ab395ab46cd3eb066e64eab0a8f4924ca3eea6b5
 const dogs = [
   {
     name: 'Floofy',
@@ -47,25 +53,25 @@ export default function Homepage() {
     })*/
   }, [])
  
-  function writeUserData(pAge, pType, pBreed, pName) {
-    try {
-        const docRef = setDoc(doc(collection(database, "pets"), user), {
-            name: pName,
-            age: pAge,
-            type: pType,
-            breed: pBreed
-        });
+//   function writeUserData(pAge, pType, pBreed, pName) {
+//     try {
+//         const docRef = setDoc(doc(collection(database, "pets"), user), {
+//             name: pName,
+//             age: pAge,
+//             type: pType,
+//             breed: pBreed
+//         });
  
  
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-    // set(ref(database, 'User UID/' + userId), {
-    //   username: name,
-    //   email: email,
-    // });
-}
+//         console.log("Document written with ID: ", docRef.id);
+//       } catch (e) {
+//         console.error("Error adding document: ", e);
+//       }
+//     // set(ref(database, 'User UID/' + userId), {
+//     //   username: name,
+//     //   email: email,
+//     // });
+// }
  
   async function handleLogout() {
     setError('')
