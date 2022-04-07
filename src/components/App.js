@@ -21,7 +21,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/" element={<PrivateRoute><LandingPage /> </PrivateRoute>}></Route>
+            <Route exact path="/" element={<LandingPage />}></Route>
             <Route exact path="/homepage" element={<PrivateRoute><Homepage /> </PrivateRoute>}></Route>
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/emailverification" element={<EmailVerification/>}/>
