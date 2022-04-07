@@ -28,17 +28,23 @@ export default function AddPet(){
 
         writePet(auth.currentUser.uid, petName, petBreed, petBreed, petAge);
       }
+
       async function handleAddPet(e) {
         e.preventDefault()
 
         try {
             setError("")
             setLoading(true)
-            writePet("blaf", "blaf", "blaf", "blaf", "blaf");
+
+            const petName = document.getElementById("petName").value
+            const petBreed = document.getElementById("petBreed").value
+            const petAge = document.getElementById("petAge").value
+
+            writePet(auth.currentUser.uid, petAge,"Dog", petBreed, petName);
 
             // navigate('/');
         } catch {
-            
+            alert('add pet function didnt work')
         }
         setLoading(false)
     }
@@ -102,7 +108,7 @@ export default function AddPet(){
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group m-0">
-                                                    <button type="submit"  onClick={handleSubmit} class="btn btn-primary btn-block">
+                                                    <button type="submit"  onClick={handleAddPet} class="btn btn-primary btn-block">
                                                         <span>Add Pet</span>
                                                     </button>
                                                 </div>
@@ -113,14 +119,6 @@ export default function AddPet(){
                             </div>
                         </div>
                     </section>
-                </body>
-                <body style={{minHeight: "100vh"}} class="nicebackground">
-                    <p class="d-flex allign-items-center justify-content-center">Add pet stuff</p>
-                    <div class="form-group m-0">
-                        <button type="submit" disabled={loading} onClick={handleAddPet} class="btn btn-primary btn-block">
-                            <span>Login</span>
-                        </button>
-                    </div>
                 </body>
             </>
     )

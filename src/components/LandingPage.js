@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 import MobileStoreButton from 'react-mobile-store-button';
 
 
-
 export default function LandingPage(){
     const navigate = useNavigate();
 
@@ -290,3 +289,4 @@ export default function LandingPage(){
       </>
     )
 }
+      

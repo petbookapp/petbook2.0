@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from
 'react-router-dom'
 import Homepage from "./Homepage"
 import Login from "./Login"
-import PrivateRoute from "./PrivateRoute"
 import ForgotPassowrd from "./ForgotPassword"
 import EmailVerification from "./EmailVerification"
 import PetInfo from "./PetInfo"
@@ -21,8 +20,8 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/" element={<PrivateRoute><LandingPage /> </PrivateRoute>}></Route>
-            <Route exact path="/homepage" element={<Homepage />}></Route>
+            <Route exact path="/" element={<LandingPage/>}></Route>
+            <Route exact path="/homepage" element={<Homepage/>}></Route>
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/emailverification" element={<EmailVerification/>}/>
             <Route exact path="/login" element={<Login/>}/>
