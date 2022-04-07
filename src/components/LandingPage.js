@@ -2,7 +2,6 @@ import iphoneBanner from "./assets/images/phones/iphone-banner.png";
 import iphoneFeature from "./assets/images/phones/iphone-feature.png"
 import iphoneScreen from "./assets/images/phones/i-phone-screen.png"
 import { useNavigate } from "react-router-dom"
-import React, { useState } from "react"
 import MobileStoreButton from 'react-mobile-store-button';
 
 
