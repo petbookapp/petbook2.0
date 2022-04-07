@@ -1,7 +1,9 @@
 import iphoneBanner from "./assets/images/phones/iphone-banner.png";
-import iphoneFeature from "./assets/images/phones/iphone-feature.png"
-import iphoneScreen from "./assets/images/phones/i-phone-screen.png"
-import { useNavigate } from "react-router-dom"
+import iphoneFeature from "./assets/images/phones/iphone-feature.png";
+import iphoneScreen from "./assets/images/phones/i-phone-screen.png";
+import googleplay from "./assets/images/googleplay.svg"
+import applestore from "./assets/images/applestore.svg"
+import { useNavigate } from "react-router-dom";
 
 
 export default function LandingPage(){
@@ -68,7 +70,16 @@ export default function LandingPage(){
                                 <h5>Try it in the app:</h5>
                                 <div class="app-badge">
                                     <ul class="list-inline">
-                                    
+                                        <li class="list-inline-item">
+                                            <div>
+                                                <img class="app-store" style={{height:"230px", width:"230px"}}src={applestore} alt="applestore"/>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <div>
+                                                <img class="app-store" style={{height:"200px", width:"300px"}}src={googleplay} alt="googleplay"/>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
