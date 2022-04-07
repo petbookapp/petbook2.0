@@ -56,7 +56,7 @@ export default function AddPet(){
                     <aside class="sidebar">
                         <nav class="nav">
                         <ul>
-                            <li><a href="/">Your Pets</a></li>
+                            <li><a href="/homepage">Your Pets</a></li>
                             <li class="active"><a href="/add-pet">Add Pet</a></li>
                             <li><a href="/account">Account</a></li>
                             <li><a href="/about">About Us</a></li>

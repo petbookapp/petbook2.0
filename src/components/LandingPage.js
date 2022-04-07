@@ -38,7 +38,7 @@ export default function LandingPage(){
             <body class="body-wrapper landing">
                 <nav class="navbar main-nav fixed-top navbar-expand-lg large">
                 <div class="container">
-                    <a class="navbar-brand" href="/"><img style={{height: "75px", width: "150px"}}src="logo.png" alt="logo"/></a>
+                    <a class="navbar-brand" href="/"><img style={{margin:"-20px", height: "75px", width: "150px"}}src="logo.png" alt="logo"/></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="ti-menu text-white"></span>
                     </button>
