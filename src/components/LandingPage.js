@@ -8,10 +8,9 @@ import MobileStoreButton from 'react-mobile-store-button';
 
 
 export default function LandingPage(){
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    async function handleSubmit(e) 
+    async function goToLogin(e) 
     {
         navigate('/login')
     }
@@ -56,7 +55,7 @@ export default function LandingPage(){
                         <a class="nav-link scrollTo" href="#feature">Features</a>
                     </li>
                     <li class="nav-item">
-                        <button class="myLogin" href="/login"><span>Login</span></button>
+                        <button class="myLogin" onClick={goToLogin}><span>Login</span></button>
                     </li>
                     </ul>
                     </div>
