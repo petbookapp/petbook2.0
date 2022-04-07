@@ -69,7 +69,7 @@ export default function Homepage() {
  
   async function handleLogout() {
     setError('')
- 
+
     try {
       await logout()
       navigate('/login')
@@ -90,7 +90,9 @@ export default function Homepage() {
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
                   <li><a href="/about">About Us</a></li>
-                  <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
+                  <li>
+                    <a href="/login"><button onSubmit={handleLogout}>Logout</button></a>
+                  </li>
                 </ul>
               </nav>
             </aside>
