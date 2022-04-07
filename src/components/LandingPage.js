@@ -2,7 +2,6 @@ import iphoneBanner from "./assets/images/phones/iphone-banner.png";
 import iphoneFeature from "./assets/images/phones/iphone-feature.png"
 import iphoneScreen from "./assets/images/phones/i-phone-screen.png"
 import { useNavigate } from "react-router-dom"
-import MobileStoreButton from 'react-mobile-store-button';
 
 
 export default function LandingPage(){
@@ -69,26 +68,7 @@ export default function LandingPage(){
                                 <h5>Try it in the app:</h5>
                                 <div class="app-badge">
                                     <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <div>
-                                                <MobileStoreButton
-                                                    style={{height: "200px" , width: "200px"}}
-                                                    store="ios"
-                                                    url={"/.login"}
-                                                    linkProps={{ title: 'iOS Store Button' }}
-                                                />
-                                            </div>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <div>
-                                                <MobileStoreButton
-                                                    style={{height: "214px" , width: "225px"}}
-                                                    store="android"
-                                                    url={"/.login"}
-                                                    linkProps={{ title: 'Android Store Button' }}
-                                                />
-                                            </div>
-                                        </li>
+                                    
                                     </ul>
                                 </div>
                             </div>
