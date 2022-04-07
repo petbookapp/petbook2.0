@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Alert } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-<<<<<<< HEAD
-import { auth } from '../firebase'
 import { writeUserData } from "./API";
-
-
-=======
 import { auth, database} from '../firebase'
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
  
@@ -25,16 +20,13 @@ const dogs = [
  
 ]
  
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   const user = auth.currentUser;
-<<<<<<< HEAD
 
-=======
  
   useEffect(() => {
     let authCode = ''
@@ -75,7 +67,6 @@ export default function Homepage() {
     // });
 }
  
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
   async function handleLogout() {
     setError('')
  

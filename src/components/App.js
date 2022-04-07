@@ -12,6 +12,7 @@ import PetInfo from "./PetInfo"
 import Account from "./Account"
 import About from "./AboutUs"
 import AddPet from "./AddPet"
+import LandingPage from "./LandingPage"
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/" element={<PrivateRoute><Homepage /> </PrivateRoute>}></Route>
+            <Route exact path="/" element={<PrivateRoute><LandingPage /> </PrivateRoute>}></Route>
+            <Route exact path="/homepage" element={<PrivateRoute><Homepage /> </PrivateRoute>}></Route>
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/emailverification" element={<EmailVerification/>}/>
             <Route exact path="/login" element={<Login/>}/>

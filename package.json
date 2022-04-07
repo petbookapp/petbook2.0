@@ -18,9 +18,14 @@
     "react-facebook-login": "^4.1.1",
     "react-firebaseui": "^6.0.0",
     "react-google-button": "^0.7.2",
+    "react-icons": "^4.3.1",
+    "react-icons-themify": "^1.0.0",
+    "react-mobile-store-button": "0.0.6",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "react-social-login-buttons": "^3.6.0",
+    "react-themify": "^1.0.0",
+    "themify-icons": "^1.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

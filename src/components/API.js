@@ -31,9 +31,9 @@ export function writeUserData(userId, name, email) {
 
 export function updateUser(userId, name, email)
 {
-    if (email != '')
+    if (email !== '')
     {
-        if (name != '')
+        if (name !== '')
         {
             updateDoc(doc(collection(database, "users"), userId), {
                 email: email,

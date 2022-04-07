@@ -61,7 +61,7 @@ export default function Signup() {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {
-            navigate('/');
+            navigate('/homepage');
           }).catch((error) => {
             setError(error.email);
             setError(GoogleAuthProvider.credentialFromError(error));
@@ -72,7 +72,7 @@ export default function Signup() {
         const provider = new FacebookAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {
-            navigate('/');
+            navigate('/homepage');
           }).catch((error) => {
             setError(error.email);
             setError(FacebookAuthProvider.credentialFromError(error));

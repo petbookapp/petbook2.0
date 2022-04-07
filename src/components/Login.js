@@ -7,11 +7,8 @@ import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "fireb
 import GoogleButton from 'react-google-button'
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
-<<<<<<< HEAD
 import { writeUserData } from "./API";
-=======
 import { getDatabase, set, ref } from 'firebase/database';
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
 
 
 export default function Login() {
@@ -21,15 +18,12 @@ export default function Login() {
     const navigate = useNavigate()
     const database = getDatabase();
 
-<<<<<<< HEAD
-=======
     function writeUserData(userId, name, email) {
         set(ref(database, 'User UID/' + userId), {
           username: name,
           email: email,
         });
     }
->>>>>>> 16d9a7837221e70b288318b4797bf797d3c16c1f
     onAuthStateChanged(auth, (user) => {
         // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
         if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
@@ -62,7 +56,7 @@ export default function Login() {
                 throw new error("Exception thrown");
             }
             // database.ref().push();
-            navigate('/');
+            navigate('/homepage');
         } catch {
             
         }
@@ -74,7 +68,7 @@ export default function Login() {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {
-            navigate('/');
+            navigate('/homepage');
           }).catch((error) => {
             setError(error.email);
             setError(GoogleAuthProvider.credentialFromError(error));
@@ -85,7 +79,7 @@ export default function Login() {
         const provider = new FacebookAuthProvider();
         signInWithPopup(auth, provider)
         .then((result) => {
-            navigate('/');
+            navigate('/homepage');
           }).catch((error) => {
             setError(error.email);
             setError(FacebookAuthProvider.credentialFromError(error));
@@ -97,7 +91,7 @@ export default function Login() {
         <head>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         </head>
-            <body class="login-form background d-flex allign-items-center justify-content-center">
+            <body style={{minHeight: "100vh"}} class="login-form background d-flex allign-items-center justify-content-center">
                 <section>
                     <div class="mycontainer">
                         <div class="row justify-content-md-center">
