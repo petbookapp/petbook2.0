@@ -2,13 +2,13 @@ import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc,
 import { auth, database} from '../firebase';
 
 
-export function writePet(userId, pAge, pType, pBreed, pName) {
+export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
     try {
 
       const docRef = addDoc(collection(database, "pets"), {
         petAge: pAge,
         petName: pName,
-        petPhoto: "",
+        petPhoto: pPhoto,
         petType: pType,
         petBreed: pBreed,
         userAssociation: userId,

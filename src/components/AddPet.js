@@ -3,12 +3,22 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { writePet } from "./API"
 import { auth } from '../firebase'
+import { storage } from '../firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 
 export default function AddPet(){
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const [image, setImage] = useState(null);
+    const [url, setUrl] = useState("");
+
+    const handleChange = e => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
+    };
 
     async function handleLogout() {
         setError('')
@@ -21,28 +31,45 @@ export default function AddPet(){
         }
       }
 
-      async function handleSubmit() {
-        const petName = document.getElementById("petName").value
-        const petBreed = document.getElementById("petBreed").value
-        const petAge = document.getElementById("petAge").value
-
-        writePet(auth.currentUser.uid, petName, petBreed, petBreed, petAge);
-      }
+      const handleUpload = (image) => {
+        const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, image)
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+          },
+          error => {
+            console.log(error);
+            alert('an error occured here');
+          },
+          () => {
+              getDownloadURL(uploadTask.snapshot.ref)
+              .then((url) => setUrl(url));
+          }
+        );
+      };
 
       async function handleAddPet(e) {
         e.preventDefault()
-
+        
         try {
             setError("")
             setLoading(true)
 
+            handleUpload(image);
+
             const petName = document.getElementById("petName").value
+            const petType = document.getElementById("petType").value
             const petBreed = document.getElementById("petBreed").value
             const petAge = document.getElementById("petAge").value
+            
 
-            writePet(auth.currentUser.uid, petAge,"Dog", petBreed, petName);
 
-            // navigate('/');
+            writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
+
         } catch {
             alert('add pet function didnt work')
         }
@@ -82,9 +109,13 @@ export default function AddPet(){
                                                     <label for="petName">Name</label>
                                                     <div className= "w-100 text-center mt-2"></div>
                                                     <input id="petName" placeHolder="Name" type="petName" class="form-control" name="petName"  required autofocus/>
-                                                    <div class="invalid-feedback">
-                                                        Email is invalid
-                                                    </div>
+                                                </div>
+                                                <div className= "w-100 text-center mt-2"></div>
+                                                <div class="form-group">
+                                                    <label for="petAge">Type of Pet
+                                                    <div className= "w-100 text-center mt-2"></div>
+                                                    </label>
+                                                    <input id="petType" placeHolder="Type of Pet" type="petType" class="form-control" name="petType" required data-eye/>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group">
@@ -92,9 +123,6 @@ export default function AddPet(){
                                                     <div className= "w-100 text-center mt-2"></div>
                                                     </label>
                                                     <input id="petBreed" placeHolder="Breed" type="petBreed" class="form-control" name="petBreed" required data-eye/>
-                                                    <div class="invalid-feedback">
-                                                        Password is required
-                                                    </div>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group">
@@ -102,13 +130,17 @@ export default function AddPet(){
                                                     <div className= "w-100 text-center mt-2"></div>
                                                     </label>
                                                     <input id="petAge" placeHolder="Age" type="petAge" class="form-control" name="petAge" required data-eye/>
-                                                    <div class="invalid-feedback">
-                                                        Password is required
-                                                    </div>
+                                                </div>
+                                                <div className= "w-100 text-center mt-2"></div>
+                                                <div class="form-group">
+                                                    <label for="petAge">Pet Photo
+                                                    <div className= "w-100 text-center mt-2"></div>
+                                                    </label>
+                                                    <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group m-0">
-                                                    <button type="submit"  onClick={handleAddPet} class="btn btn-primary btn-block">
+                                                    <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
                                                         <span>Add Pet</span>
                                                     </button>
                                                 </div>

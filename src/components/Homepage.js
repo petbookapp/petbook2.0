@@ -25,47 +25,6 @@ export default function Homepage() {
   const [pets, setPets] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
-  const user = auth.currentUser;
-
- 
-  useEffect(() => {
-    let authCode = ''
-    const requestOptions = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', "Authorization": authCode},
-      body: JSON.stringify({
-        query: ``,
-        variables: {}
-      })
-  };
- 
-    /*fetch('https://api.monday.com/v2', requestOptions, {}).then(res => res.json())
-    .then((result) => {
-      alert(JSON.stringify(result))
-      setPets(result)
-      alert(pets.data[account_id])
-    })*/
-  }, [])
- 
-//   function writeUserData(pAge, pType, pBreed, pName) {
-//     try {
-//         const docRef = setDoc(doc(collection(database, "pets"), user), {
-//             name: pName,
-//             age: pAge,
-//             type: pType,
-//             breed: pBreed
-//         });
- 
- 
-//         console.log("Document written with ID: ", docRef.id);
-//       } catch (e) {
-//         console.error("Error adding document: ", e);
-//       }
-//     // set(ref(database, 'User UID/' + userId), {
-//     //   username: name,
-//     //   email: email,
-//     // });
-// }
  
   async function handleLogout() {
     setError('')
