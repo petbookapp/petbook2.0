@@ -5,6 +5,10 @@ import { writePet } from "./API"
 import { auth } from '../firebase'
 import { storage } from '../firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 export default function AddPet(){
     const [error, setError] = useState("")
@@ -13,6 +17,10 @@ export default function AddPet(){
     const [loading, setLoading] = useState(false)
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
+
+    const notify = () => {
+        toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
+    }
 
     const handleChange = e => {
         if (e.target.files[0]) {
@@ -66,9 +74,15 @@ export default function AddPet(){
             const petBreed = document.getElementById("petBreed").value
             const petAge = document.getElementById("petAge").value
             
-
-
             writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
+            
+            document.getElementById("petName").value = "";
+            document.getElementById("petType").value = "";
+            document.getElementById("petBreed").value = "";
+            document.getElementById("petAge").value = "";
+            document.getElementById("petPhoto").value = "";
+
+            notify();
 
         } catch {
             alert('add pet function didnt work')
@@ -112,6 +126,13 @@ export default function AddPet(){
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group">
+                                                    <label for="petAge">Pet Photo
+                                                    <div className= "w-100 text-center mt-2"></div>
+                                                    </label>
+                                                    <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
+                                                </div>
+                                                <div className= "w-100 text-center mt-2"></div>
+                                                <div class="form-group">
                                                     <label for="petAge">Type of Pet
                                                     <div className= "w-100 text-center mt-2"></div>
                                                     </label>
@@ -132,17 +153,11 @@ export default function AddPet(){
                                                     <input id="petAge" placeHolder="Age" type="petAge" class="form-control" name="petAge" required data-eye/>
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group">
-                                                    <label for="petAge">Pet Photo
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    </label>
-                                                    <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group m-0">
                                                     <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
                                                         <span>Add Pet</span>
                                                     </button>
+                                                    <ToastContainer />
                                                 </div>
                                             </form>
                                         </div>
