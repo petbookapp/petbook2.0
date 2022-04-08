@@ -17,7 +17,7 @@ export default function Signup() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-   
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
@@ -41,6 +41,7 @@ export default function Signup() {
             setError("")
             setLoading(true)
             var email = document.getElementById("email").value; 
+
             await signup(email, document.getElementById("password").value
             )
             // .then(function () 
@@ -68,17 +69,6 @@ export default function Signup() {
         });
     }
 
-    const signInWithFacebook = ()=> {
-        const provider = new FacebookAuthProvider();
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            navigate('/homepage');
-          }).catch((error) => {
-            setError(error.email);
-            setError(FacebookAuthProvider.credentialFromError(error));
-        });
-    }
-
     return (
         <>
             <html lang="en">
@@ -99,20 +89,17 @@ export default function Signup() {
                                             {error && <Alert varient="danger">{error}</Alert>}
                                             <form class="signup-form">
                                                 <div class="form-group">
+                                                    <label for="name">Name</label>
+                                                    <input id="name" placeHolder="Name" type="name" class="form-control" name="name"  required autofocus/>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="email">Email Address</label>
                                                     <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
-                                                    <div class="invalid-feedback">
-                                                        Email is invalid
-                                                    </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <label for="password">Password
                                                     </label>
                                                     <input id="password" placeHolder="Password" type="password" class="form-control" name="password" required data-eye/>
-                                                    <div class="invalid-feedback">
-                                                        Password is required
-                                                    </div>
                                                 </div>
 
                                                 <div class="form-group">
@@ -128,10 +115,6 @@ export default function Signup() {
                                                 </div>
                                                 <div className= "w-100 text-center mt-2">
                                                 ━━━━━━━━━━━━━━━━━━━ &nbsp;&nbsp; OR &nbsp;&nbsp;━━━━━━━━━━━━━━━━━━━
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group ">
-                                                    <FacebookLoginButton style={{ width:310,height:50}} text='Sign Up with Facebook' onClick={signInWithFacebook} className="stylefacebookButton"/> 
                                                 </div>
                                                 <div className= "w-100 text-center mt-2"></div>
                                                 <div class="form-group m-0">

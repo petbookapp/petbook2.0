@@ -73,17 +73,6 @@ export default function Login() {
         }).then();
     }
 
-    const signInWithFacebook = ()=> {
-        const provider = new FacebookAuthProvider();
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            navigate('/homepage');
-          }).catch((error) => {
-            setError(error.email);
-            setError(FacebookAuthProvider.credentialFromError(error));
-        });
-    }
-
     return (
         <>
         <head>
@@ -136,10 +125,6 @@ export default function Login() {
                                             </div>
                                             <div className= "w-100 text-center mt-2">
                                             ━━━━━━━━━━━━━━━━━━━ &nbsp;&nbsp; OR &nbsp;&nbsp;━━━━━━━━━━━━━━━━━━━
-                                            </div>
-                                            <div className= "w-100 text-center mt-2"></div>
-                                            <div class="form-group ">
-                                                <FacebookLoginButton style={{ width:310,height:50}} disabled={loading} onClick={signInWithFacebook} className="stylefacebookButton"/>
                                             </div>
                                             <div className= "w-100 text-center mt-2"></div>
                                             <div class="form-group m-0">
