@@ -78,11 +78,19 @@ export function deletePet(userId, pName) {
 
 export function getPets(userId) {
   try {
-      const q = query(doc(collection(database, "pets"), where("userAssociation", "==", userId)));
-      const querySnapshot = getDocs(q);
+      const q = query(collection(database, "pets"), where("userAssociation", "==", true));
+      const querySnapshot = getDocs(q)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
       console.log(querySnapshot);
 
+      }).catch((err) => {
+        
+      });
     } catch (e) {
-      console.error("Error deletign document: ", e);
+      console.error("API ERROR ", e);
     }
 }

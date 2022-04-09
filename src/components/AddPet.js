@@ -18,10 +18,6 @@ export default function AddPet(){
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
 
-    const notify = () => {
-        toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
-    }
-
     const handleChange = e => {
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
@@ -82,7 +78,7 @@ export default function AddPet(){
             document.getElementById("petAge").value = "";
             document.getElementById("petPhoto").value = "";
 
-            notify();
+            toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
 
         } catch {
             alert('add pet function didnt work')
@@ -157,7 +153,6 @@ export default function AddPet(){
                                                     <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
                                                         <span>Add Pet</span>
                                                     </button>
-                                                    <ToastContainer />
                                                 </div>
                                             </form>
                                         </div>
