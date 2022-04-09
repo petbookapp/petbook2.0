@@ -90,6 +90,7 @@ export function getPets(userId) {
       }).catch((err) => {
         
       });
+      return querySnapshot;
     } catch (e) {
       console.error("API ERROR ", e);
     }
