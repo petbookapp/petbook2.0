@@ -78,11 +78,9 @@ export function deletePet(userId, pName) {
 
 export function getPets(userId) {
   try {
-      const q = query(doc(collection(database, "pets"), userId));
+      const q = query(doc(collection(database, "pets"), where("userAssociation", "==", userId)));
       const querySnapshot = getDocs(q);
-      querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
-        });
+      console.log(querySnapshot);
 
     } catch (e) {
       console.error("Error deletign document: ", e);

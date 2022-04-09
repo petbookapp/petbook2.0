@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { getPets } from "./API"
  
 const dogs = [
   {
@@ -19,7 +20,11 @@ const dogs = [
   },
  
 ]
- 
+
+
+// const dogs = getPets(auth.currentUser.uid);
+
+
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
