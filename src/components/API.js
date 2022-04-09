@@ -81,7 +81,7 @@ export function getPets(userId) {
       const q = query(doc(collection(database, "pets"), where("userAssociation", "==", userId)));
       const querySnapshot = getDocs(q);
       console.log(querySnapshot);
-
+      return querySnapshot;
     } catch (e) {
       console.error("Error deletign document: ", e);
     }
