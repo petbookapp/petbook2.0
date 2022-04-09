@@ -10,6 +10,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { set, ref } from 'firebase/database'
 import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
 import { writeUserData } from "./API";
+import { errorMessage } from "../context/AuthContext"
+
 
 
 export default function Signup() {
@@ -35,7 +37,8 @@ export default function Signup() {
 
         if(document.getElementById("password").value !==
         document.getElementById("confirm-password").value) {
-            return setError('Passwords do not match')
+            document.getElementById("passwordConfirmError").innerHTML = 'Passwords do not match';
+            return;
         }
         try {
             setError("")
@@ -53,7 +56,12 @@ export default function Signup() {
 
             navigate('/emailverification');
         } catch {
-
+            if(errorMessage === '1') {
+                document.getElementById("passwordError").innerHTML = 'Passwords must be at least 6 characters long';
+            }
+            else {
+               document.getElementById("emailError").innerHTML = errorMessage; 
+            }
         }
         setLoading(false)
     }
@@ -95,17 +103,20 @@ export default function Signup() {
                                                 <div class="form-group">
                                                     <label for="email">Email Address</label>
                                                     <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
+                                                    <p><span class="error text-danger" id="emailError"></span></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="password">Password
                                                     </label>
                                                     <input id="password" placeHolder="Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <p><span class="error text-danger" id="passwordError"></span></p>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="password">Confirm Password
                                                     </label>
                                                     <input id="confirm-password" placeHolder="Confirm Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <p><span class="error text-danger" id="passwordConfirmError"></span></p>
                                                 </div>
 
                                                 <div class="form-group m-0">

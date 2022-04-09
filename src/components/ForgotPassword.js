@@ -17,7 +17,6 @@ export default function ForgotPassowrd() {
             setError("")
             setLoading(true)
             await resetPassword(emailRef.current.value)
-            setMessage('Reset Link sent to Email')
         } catch {
             setError('Failed to Reset Password')
         }

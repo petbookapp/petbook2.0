@@ -3,11 +3,13 @@ import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { auth } from '../firebase'
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import GoogleButton from 'react-google-button'
-import { FacebookLoginButton } from "react-social-login-buttons";
 import { onAuthStateChanged } from "firebase/auth";
 import { getDatabase, set, ref } from 'firebase/database';
+import { errorMessage } from "../context/AuthContext"
+import { toast } from "react-toastify"
+
 
 
 export default function Login() {
@@ -22,24 +24,24 @@ export default function Login() {
           email: email,
         });
     }
-    onAuthStateChanged(auth, (user) => {
-        // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
-        if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
-        {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                writeUserData(uid, "322332", user.email)
+    // onAuthStateChanged(auth, (user) => {
+    //     // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
+    //     if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
+    //     {
+    //         if (user) {
+    //             // User is signed in, see docs for a list of available properties
+    //             // https://firebase.google.com/docs/reference/js/firebase.User
+    //             const uid = user.uid;
+    //             writeUserData(uid, "322332", user.email)
                 
-              } else {
-                // User is signed out
-                // ...
-              }
+    //           } else {
+    //             // User is signed out
+    //             // ...
+    //           }
 
-        }
+    //     }
 
-      });
+    //   });
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -50,13 +52,22 @@ export default function Login() {
             // const data = {"Email"}
             await login(document.getElementById("email").value, document.getElementById("password").value);
             if(!auth.currentUser.emailVerified){
-                setError('Please verify your email before logging in ')
+                setError("Please Verify Your Email Address", {position: toast.POSITION.BOTTOM_CENTER});
                 throw new error("Exception thrown");
             }
             // database.ref().push();
             navigate('/homepage');
         } catch {
-            
+            if(errorMessage === '1') {
+                document.getElementById("passwordError").innerHTML = 'Incorrect Password';
+            }
+            else if(errorMessage === ""){
+                document.getElementById("passwordError").innerHTML = '';
+                document.getElementById("emailError").innerHTML = '';
+            }
+            else {
+               document.getElementById("emailError").innerHTML = errorMessage; 
+            }
         }
         setLoading(false)
     }
@@ -94,9 +105,7 @@ export default function Login() {
                                             <div class="form-group">
                                                 <label for="email">Email Address</label>
                                                 <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
-                                                <div class="invalid-feedback">
-                                                    Email is invalid
-                                                </div>
+                                                <p><span class="error text-danger" id="emailError"></span></p>
                                             </div>
 
                                             <div class="form-group">
@@ -106,9 +115,7 @@ export default function Login() {
                                                 <a href="/forgot-password" class="float-right">
                                                     Forgot Password?
                                                 </a>
-                                                <div class="invalid-feedback">
-                                                    Password is required
-                                                </div>
+                                                <p><span class="error text-danger" id="passwordError"></span></p>
                                             </div>
 
                                             <div class="form-group">

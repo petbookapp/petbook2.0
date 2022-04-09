@@ -96,7 +96,11 @@
 
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../firebase'
-import { Alert } from "react-bootstrap"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+var errorMessage = "";
+export {errorMessage};
 
 const AuthContext = React.createContext()
 
@@ -107,7 +111,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const[loading,setLoading] = useState(true)
-    const [error, setError] = useState('')
 
     async function signup(email, password) {
         let userCredential
@@ -116,23 +119,22 @@ export function AuthProvider({ children }) {
         } catch (error) {
             switch (error.code) {
                 case 'auth/email-already-in-use':
-                     setError(`The Email ${email} already in use.`)
+                     errorMessage = `${email} is already in use`
                      break
                 case 'auth/invalid-email':
-                     setError(`The Email ${email} is invalid.`)
+                     errorMessage = `${email} is invalid`
                      break
                 case 'auth/operation-not-allowed':
-                     setError(`Sign Up Failed.`)
+                     errorMessage = `Sign Up Failed`
                      break
                 case 'auth/weak-password':
-                     setError('Password Must be at least 6 characters long')
+                     errorMessage = '1'
                      break
                 default:
-                     setError(error.message)
+                     errorMessage = error.message
             }
         }
         userCredential.user.sendEmailVerification()
-        setError("")
     }
 
     async function login(email, password) {
@@ -141,31 +143,36 @@ export function AuthProvider({ children }) {
         } catch (error) {
             switch (error.code) {
                 case 'auth/invalid-email':
-                    setError(`The Email ${email} is invalid.`)
+                    errorMessage = `The Email ${email} is invalid`
                     break
                 case 'auth/user-disabled':
-                    setError(`The ${this.state.email} is disabled.`)
+                    errorMessage = `The ${this.state.email} is disabled`
                     break
                 case 'auth/user-not-found':
-                    setError(`Email Entered Not Found`)
+                    errorMessage = `The email address you entered is not found`
                     break
                 case 'auth/wrong-password':
-                    setError('Incorrect Password.')
+                    errorMessage = '1'
                     break
                 default:
-                    setError(error.message)
+                    errorMessage = error.message
             }
             return;
         }
-        setError("")
+        errorMessage = "";
     }
    
     function logout() {
         return auth.signOut()
     }
 
-    function resetPassword(email) {
-        return auth.sendPasswordResetEmail(email)
+    async function resetPassword(email) {
+        try {
+            auth.sendPasswordResetEmail(email)
+            toast.success("Password Reset Sent", {position: toast.POSITION.TOP_CENTER});
+        } catch (e) {
+            toast.error("Email Not Found", {position: toast.POSITION.TOP_CENTER});
+        } 
     }
 
 
@@ -191,7 +198,7 @@ export function AuthProvider({ children }) {
         <>
             <AuthContext.Provider value={value}>
                 {!loading && children}
-                {error && <Alert varient="danger">{error}</Alert>}
+                <ToastContainer />
             </AuthContext.Provider>          
         </>
     )
