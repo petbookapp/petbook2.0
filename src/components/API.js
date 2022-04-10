@@ -1,7 +1,6 @@
 import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import { auth, database} from '../firebase';
 
-
 export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
     try {
 
@@ -77,21 +76,22 @@ export function deletePet(userId, pName) {
 }
 
 export function getPets(userId) {
+  let petsData  = []
   try {
-      const q = query(collection(database, "pets"), where("userAssociation", "==", true));
-      const querySnapshot = getDocs(q)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-      console.log(querySnapshot);
-
+      const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
+      getDocs(q)
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) => {
+            petsData.push({...doc.data()})
+          })
+          console.log(petsData);
+          
       }).catch((err) => {
-        
+        console.log("an error occurred")
       });
-      return querySnapshot;
+      
     } catch (e) {
       console.error("API ERROR ", e);
     }
+    return petsData;
 }

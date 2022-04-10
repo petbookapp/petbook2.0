@@ -5,20 +5,16 @@ import { useAuth } from '../context/AuthContext'
 import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
 import { getPets } from "./API"
- 
-
-
-// const dogs = getPets(auth.currentUser.uid);
-
+import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
-
-  getPets(auth.currentUser.uid)
   
+  let petsData  = []
+
   async function handleLogout() {
     try {
       await logout()
@@ -27,6 +23,26 @@ export default function Homepage() {
       setError('Logout failed')
     }
   }
+
+  function getPets(userId) {
+    
+    try {
+        const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
+        getDocs(q)
+          .then((querySnapshot) => {
+            querySnapshot.docs.forEach((doc) => {
+              petsData.push({...doc.data()})
+            })
+        }).catch((err) => {
+          console.log("an error occurred")
+        });
+        
+      } catch (e) {
+        console.error("API ERROR ", e);
+      }
+  }
+
+  getPets(auth.currentUser.uid)
  
   return (
     <>
