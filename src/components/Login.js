@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useForm } from "react-hook-form";
 import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -9,6 +10,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { getDatabase, set, ref } from 'firebase/database';
 import { errorMessage } from "../context/AuthContext"
 import { toast } from "react-toastify"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 
 
@@ -17,6 +21,7 @@ export default function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
+    const [passwordShown, setPasswordShown] = useState(false);
 
     function writeUserData(userId, name, email) {
         set(ref(getDatabase, 'User UID/' + userId), {
@@ -84,9 +89,15 @@ export default function Login() {
         }).then();
     }
 
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+      };
+
+
     return (
         <>
         <head>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>   
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         </head>
             <body style={{minHeight: "100vh"}} class="login-form background d-flex allign-items-center justify-content-center">
@@ -111,7 +122,8 @@ export default function Login() {
                                             <div class="form-group">
                                                 <label for="password">Password
                                                 </label>
-                                                <input id="password" placeHolder="Password" type="password" class="form-control" name="password" required data-eye/>
+                                                <input id="password" placeHolder="Password" type={passwordShown ? "text" : "password"} class="form-control" name="password" required data-eye></input>
+                                                <i onClick={togglePasswordVisiblity} id="eye">{eye}</i>
                                                 <a href="/forgot-password" class="float-right">
                                                     Forgot Password?
                                                 </a>

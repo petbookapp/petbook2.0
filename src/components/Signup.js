@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useForm } from "react-hook-form";
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
@@ -12,12 +13,18 @@ import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { writeUserData } from "./API";
 import { errorMessage } from "../context/AuthContext"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 
 export default function Signup() {
     const { signup } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [passwordShown, setPasswordShown] = useState(false)
+    const [passwordShown2, setPasswordShown2] = useState(false)
+
     const navigate = useNavigate();
 
     onAuthStateChanged(auth, (user) => {
@@ -77,10 +84,21 @@ export default function Signup() {
         });
     }
 
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+      };
+
+    const togglePasswordVisiblity2 = () => {
+        setPasswordShown2(passwordShown2 ? false : true);
+      };
+
+      
+
     return (
         <>
             <html lang="en">
             <head>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>  
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
             </head>
                 <body class="login-form background">
@@ -105,17 +123,19 @@ export default function Signup() {
                                                     <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
                                                     <p><span class="error text-danger" id="emailError"></span></p>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group password">
                                                     <label for="password">Password
                                                     </label>
-                                                    <input id="password" placeHolder="Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <input id="password" placeHolder="Password" type={passwordShown ? "text" : "password"} class="form-control" name="password" required data-eye/>
+                                                    <i onClick={togglePasswordVisiblity}>{eye}</i>
                                                     <p><span class="error text-danger" id="passwordError"></span></p>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group confirm">
                                                     <label for="password">Confirm Password
                                                     </label>
-                                                    <input id="confirm-password" placeHolder="Confirm Password" type="password" class="form-control" name="password" required data-eye/>
+                                                    <input id="confirm-password" placeHolder="Confirm Password" type={passwordShown2 ? "text" : "password"} class="form-control" name="confirm-password" required data-eye/>
+                                                    <i onClick={togglePasswordVisiblity2}>{eye}</i>
                                                     <p><span class="error text-danger" id="passwordConfirmError"></span></p>
                                                 </div>
 
