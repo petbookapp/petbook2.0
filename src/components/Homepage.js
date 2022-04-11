@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
-import { getPets } from "./API"
 import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
+import { get } from 'firebase/database';
 
 export default function Homepage() {
   const [error, setError] = useState("")
@@ -13,8 +13,11 @@ export default function Homepage() {
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   
-  let petsData  = []
+  useEffect(() => {
+    getPets(auth.currentUser.uid)
+  }, []);
 
+  
   async function handleLogout() {
     try {
       await logout()
@@ -24,8 +27,8 @@ export default function Homepage() {
     }
   }
 
-  function getPets(userId) {
-    
+  async function getPets(userId) {
+    let petsData = []
     try {
         const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
         getDocs(q)
@@ -33,6 +36,7 @@ export default function Homepage() {
             querySnapshot.docs.forEach((doc) => {
               petsData.push({...doc.data()})
             })
+            setPets(petsData)
         }).catch((err) => {
           console.log("an error occurred")
         });
@@ -42,8 +46,6 @@ export default function Homepage() {
       }
   }
 
-  getPets(auth.currentUser.uid)
- 
   return (
     <>
     <div className="nicebackground">
@@ -71,6 +73,21 @@ export default function Homepage() {
           <h2 style={{ fontSize: 20 }} className="text-center mb-4">
             {currentUser.email} 
           </h2>
+          {Object.keys(pets).map((key) => (
+              <>
+                <Card.Body>
+                  {error && <Alert varient="danger">{error}</Alert>}
+                  <div class="pet-container">
+                    <div class="pet-card">
+                      <img src={pets[key]["petPhoto"]} alt="My Pet"/>
+                      <h1>{pets[key]["petName"]}</h1>
+                      <h2>{pets[key]["petBreed"]} {pets[key]["petAge"]}</h2>
+                      <a class="button" href={`/pet-info/${pets[key]}`} ><span>+</span> View</a>
+                    </div>
+                  </div>
+                </Card.Body>
+                </>
+            ))}
         </ul>
     </div>
     </>

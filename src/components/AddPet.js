@@ -35,7 +35,7 @@ export default function AddPet(){
         }
       }
 
-      const handleUpload = (image) => {
+      async function handleUpload(image) {
         const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image)
         uploadTask.on(
@@ -63,7 +63,7 @@ export default function AddPet(){
             setError("")
             setLoading(true)
 
-            handleUpload(image);
+            await handleUpload(image);
 
             const petName = document.getElementById("petName").value
             const petType = document.getElementById("petType").value

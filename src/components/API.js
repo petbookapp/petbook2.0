@@ -75,23 +75,3 @@ export function deletePet(userId, pName) {
       }
 }
 
-export function getPets(userId) {
-  let petsData  = []
-  try {
-      const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
-      getDocs(q)
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            petsData.push({...doc.data()})
-          })
-          console.log(petsData);
-          
-      }).catch((err) => {
-        console.log("an error occurred")
-      });
-      
-    } catch (e) {
-      console.error("API ERROR ", e);
-    }
-    return petsData;
-}
