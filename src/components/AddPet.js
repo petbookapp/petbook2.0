@@ -5,16 +5,16 @@ import { writePet } from "./API"
 import { auth } from '../firebase'
 import { storage } from '../firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 export default function AddPet(){
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const [setError] = useState("")
+    const { logout } = useAuth()
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
+    const [ setLoading] = useState(false)
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
 
@@ -35,7 +35,9 @@ export default function AddPet(){
         }
       }
 
-      async function handleUpload(image) {
+      async function handleAddPet(e) {
+        e.preventDefault()
+
         const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image)
         uploadTask.on(
@@ -52,39 +54,33 @@ export default function AddPet(){
           () => {
               getDownloadURL(uploadTask.snapshot.ref)
               .then((url) => setUrl(url));
-          }
+              try {
+                setError("")
+                setLoading(true)
+    
+                const petName = document.getElementById("petName").value
+                const petType = document.getElementById("petType").value
+                const petBreed = document.getElementById("petBreed").value
+                const petAge = document.getElementById("petAge").value
+                
+                writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
+    
+                document.getElementById("petName").value = "";
+                document.getElementById("petType").value = "";
+                document.getElementById("petBreed").value = "";
+                document.getElementById("petAge").value = "";
+                document.getElementById("petPhoto").value = "";
+    
+                toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
+    
+            } catch {
+                alert('add pet function didnt work')
+            }
+            setLoading(false)
+            }
         );
-      };
-
-      async function handleAddPet(e) {
-        e.preventDefault()
-        
-        try {
-            setError("")
-            setLoading(true)
-
-            await handleUpload(image);
-
-            const petName = document.getElementById("petName").value
-            const petType = document.getElementById("petType").value
-            const petBreed = document.getElementById("petBreed").value
-            const petAge = document.getElementById("petAge").value
-            
-            writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
-            
-            document.getElementById("petName").value = "";
-            document.getElementById("petType").value = "";
-            document.getElementById("petBreed").value = "";
-            document.getElementById("petAge").value = "";
-            document.getElementById("petPhoto").value = "";
-
-            toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
-
-        } catch {
-            alert('add pet function didnt work')
-        }
-        setLoading(false)
     }
+
 
     return (
             <>

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Alert } from "react-bootstrap"
+import { Card, Alert } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
-import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
-import { get } from 'firebase/database';
+import { collection, getDocs, query, where} from "firebase/firestore"; 
 
 export default function Homepage() {
   const [error, setError] = useState("")
@@ -81,7 +79,7 @@ export default function Homepage() {
                     <div class="pet-card">
                       <img src={pets[key]["petPhoto"]} alt="My Pet"/>
                       <h1>{pets[key]["petName"]}</h1>
-                      <h2>{pets[key]["petBreed"]} {pets[key]["petAge"]}</h2>
+                      <h2>{pets[key]["petBreed"]}</h2>
                       <a class="button" href={`/pet-info/${pets[key]}`} ><span>+</span> View</a>
                     </div>
                   </div>
