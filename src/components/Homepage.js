@@ -5,9 +5,11 @@ import { useAuth } from '../context/AuthContext'
 import { auth, database} from '../firebase'
 import { collection, getDocs, query, where} from "firebase/firestore"; 
 
+
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
+  const [petID, setPetID] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   
@@ -27,13 +29,17 @@ export default function Homepage() {
 
   async function getPets(userId) {
     let petsData = []
+    let petsID = []
     try {
         const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
         getDocs(q)
           .then((querySnapshot) => {
             querySnapshot.docs.forEach((doc) => {
               petsData.push({...doc.data()})
+              petsID.push(doc.id)
             })
+
+            setPetID(petsID)
             setPets(petsData)
         }).catch((err) => {
           console.log("an error occurred")
@@ -80,7 +86,7 @@ export default function Homepage() {
                       <img src={pets[key]["petPhoto"]} alt="My Pet"/>
                       <h1>{pets[key]["petName"]}</h1>
                       <h2>{pets[key]["petBreed"]}</h2>
-                      <a class="button" href={`/pet-info/${pets[key]}`} ><span>+</span> View</a>
+                      <a class="button" href={`/pet-info/${petID[Number(key)]}`} ><span>+</span> View</a>
                     </div>
                   </div>
                 </Card.Body>

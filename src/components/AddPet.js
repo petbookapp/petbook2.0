@@ -16,7 +16,6 @@ export default function AddPet(){
     const navigate = useNavigate()
     const [ setLoading] = useState(false)
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
 
     const handleChange = e => {
         if (e.target.files[0]) {
