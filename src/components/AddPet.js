@@ -40,44 +40,49 @@ export default function AddPet(){
 
         const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
         const uploadTask = uploadBytesResumable(storageRef, image)
-        uploadTask.on(
-          "state_changed",
-          snapshot => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-          },
-          error => {
-            console.log(error);
-            alert('an error occured here');
-          },
-          () => {
-              getDownloadURL(uploadTask.snapshot.ref)
-              .then((url) => setUrl(url));
-              try {
-                setError("")
-                setLoading(true)
-    
-                const petName = document.getElementById("petName").value
-                const petType = document.getElementById("petType").value
-                const petBreed = document.getElementById("petBreed").value
-                const petAge = document.getElementById("petAge").value
-                
-                writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
-    
-                document.getElementById("petName").value = "";
-                document.getElementById("petType").value = "";
-                document.getElementById("petBreed").value = "";
-                document.getElementById("petAge").value = "";
-                document.getElementById("petPhoto").value = "";
-    
-                toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
-    
-            } catch {
-                alert('add pet function didnt work')
+        uploadTask.on('state_changed', 
+        (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+            case 'paused':
+                console.log('Upload is paused');
+                break;
+            case 'running':
+                console.log('Upload is running');
+                break;
+            default:
             }
-            setLoading(false)
-            }
+        }, 
+        (error) => {
+            // Handle unsuccessful uploads
+        }, 
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+                try {
+                    const petName = document.getElementById("petName").value
+                    const petType = document.getElementById("petType").value
+                    const petBreed = document.getElementById("petBreed").value
+                    const petAge = document.getElementById("petAge").value
+                    
+                    writePet(auth.currentUser.uid, petAge, petType, downloadURL, petBreed, petName);
+        
+                    document.getElementById("petName").value = "";
+                    document.getElementById("petType").value = "";
+                    document.getElementById("petBreed").value = "";
+                    document.getElementById("petAge").value = "";
+                    document.getElementById("petPhoto").value = "";
+        
+                    toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
+        
+                    } catch {
+                        alert('add pet function didnt work')
+                    }
+            });
+        }
         );
     }
 
