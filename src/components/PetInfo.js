@@ -68,16 +68,13 @@ export default function Homepage() {
           </h2>
           {Object.keys(pets).map((key) => (
               <>
-                <Card.Body>
-                  {error && <Alert varient="danger">{error}</Alert>}
-                  <div class="pet-container">
+                  <div class="pet-info-container">
                     <div class="pet-card">
                       <img src={pets[key]["petPhoto"]} alt="My Pet"/>
                       <h1>{pets[key]["petName"]}</h1>
                       <h2>{pets[key]["petBreed"]}</h2>
                     </div>
                   </div>
-                </Card.Body>
                 </>
             ))}
         </ul>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { useAuth } from '../context/AuthContext'
 import { Alert } from "react-bootstrap"
@@ -22,31 +22,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const [passwordShown, setPasswordShown] = useState(false);
-
-    function writeUserData(userId, name, email) {
-        set(ref(getDatabase, 'User UID/' + userId), {
-          username: name,
-          email: email,
-        });
-    }
-    // onAuthStateChanged(auth, (user) => {
-    //     // console.log(user.metadata.lastLoginAt + " .  " + user.metadata.createdAt)
-    //     if ((user.metadata.lastLoginAt - user.metadata.createdAt) <= 1)
-    //     {
-    //         if (user) {
-    //             // User is signed in, see docs for a list of available properties
-    //             // https://firebase.google.com/docs/reference/js/firebase.User
-    //             const uid = user.uid;
-    //             writeUserData(uid, "322332", user.email)
-                
-    //           } else {
-    //             // User is signed out
-    //             // ...
-    //           }
-
-    //     }
-
-    //   });
 
     async function handleSubmit(e) {
         e.preventDefault()

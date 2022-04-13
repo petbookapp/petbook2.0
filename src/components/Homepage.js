@@ -77,6 +77,7 @@ export default function Homepage() {
           <h2 style={{ fontSize: 20 }} className="text-center mb-4">
             {currentUser.email} 
           </h2>
+          <div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm">
           {Object.keys(pets).map((key) => (
               <>
                 <Card.Body>
@@ -92,6 +93,7 @@ export default function Homepage() {
                 </Card.Body>
                 </>
             ))}
+            </div>
         </ul>
     </div>
     </>
