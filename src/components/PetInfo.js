@@ -50,7 +50,7 @@ export default function Homepage() {
           <aside className="sidebar">
               <nav className="nav">
                 <ul>
-                  <li><a href="/homepage">Your Pets</a></li>
+                  <li><a href="/homepage">Pets</a></li>
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
                   <li><a href="/about">About</a></li>
