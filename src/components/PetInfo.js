@@ -53,7 +53,7 @@ export default function Homepage() {
                   <li><a href="/homepage">Your Pets</a></li>
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
-                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/about">About</a></li>
                   <li>
                     <a href="/login"><button onSubmit={handleLogout}>Logout</button></a>
                   </li>
@@ -68,7 +68,7 @@ export default function Homepage() {
           </h2>
           {Object.keys(pets).map((key) => (
               <>
-                  <div class="pet-info-container">
+                  <div class="pet-container">
                     <div class="pet-card">
                       <img src={pets[key]["petPhoto"]} alt="My Pet"/>
                       <h1>{pets[key]["petName"]}</h1>

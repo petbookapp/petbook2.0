@@ -96,7 +96,7 @@ export default function AddPet(){
                             <li><a href="/homepage">Your Pets</a></li>
                             <li class="active"><a href="/add-pet">Add Pet</a></li>
                             <li><a href="/account">Account</a></li>
-                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>
                         </ul>
                         </nav>
@@ -105,8 +105,8 @@ export default function AddPet(){
                 </main>
                 <body style={{minHeight: "100vh"}} class="nicebackground login-form d-flex allign-items-center justify-content-center">
                     <section>
-                        <div class="mycontainer">
-                            <div class="row justify-content-md-center">
+                        <div class="mycontainer ">
+                            <div class="row justify-content-md-center center-margin">
                                 <div class="card-wrapper">
                                     <div class="brand">
                                         <img src="logo.png" alt="logo"/>

@@ -61,7 +61,7 @@ export default function Homepage() {
                   <li className="active"><a href="/homepage">Your Pets</a></li>
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
-                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/about">About</a></li>
                   <li>
                     <a href="/login"><button onSubmit={handleLogout}>Logout</button></a>
                   </li>
@@ -72,12 +72,9 @@ export default function Homepage() {
         </main>
         <ul style={{height: "100%"}}>
           <h2 style={{ fontSize: 25 }} className="text-center mb-4">
-            <img className="logo" src="logo.png" alt="logo"/>
+            <img className="logo center-margin" src="logo.png" alt="logo"/>
           </h2>
-          <h2 style={{ fontSize: 20 }} className="text-center mb-4">
-            {currentUser.email} 
-          </h2>
-          <div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 gutters-sm">
+          <div class="container-fluid row row-cols-2 row-cols-sm-3 g-1">
           {Object.keys(pets).map((key) => (
               <>
                 <Card.Body>
