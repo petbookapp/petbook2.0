@@ -25,10 +25,10 @@ export default function About(){
             <aside class="sidebar">
                 <nav class="nav">
                 <ul>
-                    <li><a href="/homepage">Your Pets</a></li>
+                    <li><a href="/homepage">Pets</a></li>
                     <li><a href="/add-pet">Add Pet</a></li>
                     <li><a href="/account">Account</a></li>
-                    <li class="active"><a href="/about">About Us</a></li>
+                    <li class="active"><a href="/about">About</a></li>
                     <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>
                 </ul>
                 </nav>

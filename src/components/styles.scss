@@ -9,12 +9,16 @@ body {
 html {
 	height: 100% !important;
 }
+
+.center-margin {
+  margin-left: 80px;
+}
+
 img.logo{
   width: 200px !important;
 	height: 80px !important;
 	overflow: hidden !important;
 	border-radius: 50% !important;
-	margin: 1px auto !important;
 	position: relative !important;
 	z-index: 1 !important;
 }
@@ -188,6 +192,28 @@ background-size: cover !important;
     text-decoration: none;
     border-radius: 50%;
   }
+
+  .login-form i {
+    position: relative;
+    top: -31px;
+    left: 277px;
+  }
+  .password i {
+    position: relative;
+    top: -31px;
+    left: 277px;
+  }
+  .confirm i {
+    position: relative;
+    top: -31px;
+    left: 277px;
+  }
+  i:hover {
+    color: #00fcb6;
+    cursor: pointer;
+  }
+
+
   
   /* Add a hover effect if you want */
   .fa:hover {
@@ -255,10 +281,10 @@ main {
   .sidebar {
     left: 0;
     position: fixed !important;
-    width: 13% !important;
+    width: 8.5% !important;
     height: 100vh !important;
-    background: #3A405A !important;
-    font-size: 0.65em !important;
+    background: #42388d !important;
+    font-size: 0.61em !important;
   }
   
   .user-text {
@@ -267,7 +293,7 @@ main {
 
   .nav {
     position: relative !important;
-    margin: 0 13% !important;
+    margin: 0 -18% !important;
     text-align: right !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
@@ -279,7 +305,7 @@ main {
 
     li {
       position: relative !important;
-      margin: 3.2em 0 !important;
+      margin: 4.2em 0 !important;
   
       button {
         border: none !important;
@@ -292,7 +318,7 @@ main {
         position: relative !important;
         color: #fff !important;
         font-weight: 700 !important;
-        font-size: 15px !important;
+        font-size: 13px !important;
         background-color: #000 !important;
         padding: 17px 25px !important;
         margin: 0 auto !important;
@@ -336,15 +362,14 @@ main {
 }
 
 .pet-container {
-
-  margin: auto !important;
-    font-family: "Poppins", Arial, san-serif !important;
-    line-height: 1.4 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    background-color: color(#f9f9f9) !important;
-    height: 100% !important;
+  margin-left: 100px;
+  font-family: "Poppins", Arial, san-serif !important;
+  line-height: 1.4 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: color(#f9f9f9) !important;
+  height: 100% !important;
 
   @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600");
 
@@ -358,18 +383,18 @@ main {
   }
 
   .pet-card {
-    background: #fff
-    url("https://storage.googleapis.com/chydlx/codepen/minimalist-profile-card/card-bg.jpg")
-    top -10% center no-repeat !important;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px -5px rgba(60, 60, 60, 0.2);
-  text-align: center;
-  padding: 20px 90px;
-
+    background: url("https://i.imgur.com/bZkkg13.jpg")
+      center no-repeat !important;
+      height: 400px;
+      width: 400px;
+    box-shadow: 0 10px 30px -5px rgba(60, 60, 60, 0.2);
+    text-align: center;
+    padding: 20px 80px;
+    
     img {
       background-color: color(#dddfe6) !important;
-      height: 150px !important;
-      width: 150px !important;
+      height: 175px !important;
+      width: 175px !important;
       border-radius: 50% !important;
       margin: auto auto 15px !important;
       display: block !important;
@@ -381,7 +406,7 @@ main {
     }
     h2 {
       margin: auto !important;
-      color: darken(#dddfe6, 15) !important;
+      color: darken(#292a2c, 15) !important;
       font-weight: 300 !important;
       font-size: 14px !important;
     }
@@ -394,7 +419,7 @@ main {
       padding: 12px !important;
       border: none !important;
       border-radius: 25px !important;
-      margin-top: 30px !important;
+      margin-top: 1px !important;
       font-size: 16px !important;
       font-weight: 700 !important;
       min-width: 200px !important;
@@ -407,7 +432,7 @@ main {
       }
       
       &:hover {
-        background: darken(#3b70fc, 7) !important;
+        background: darken(#3b70fc, 1) !important;
       }
     }
   }
@@ -590,11 +615,12 @@ main {
   a {
     color: inherit !important;
     transition: .2s ease !important;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
 
   a:focus,
   a:hover {
-    color: #7d71d3 !important;
+    color: #000000 !important;
     text-decoration: none !important;
   }
 

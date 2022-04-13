@@ -1,77 +1,85 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Card, Alert } from "react-bootstrap"
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { useParams } from "react-router-dom";
-import { Card } from 'react-bootstrap';
- 
-const dogObj = 
-  {
-    name: 'Floofy',
-    age: 10,
-    breed: 'Golden Retriever',
-    food: 'Purina',
-    walkTime: 30,
-    favTreats: 'rice, tuna',
-    birthday: '3/13/1998'
-  }
- 
- 
-export default function PetInfo(){
-    const [error, setError] = useState("")
-    const [petData, setPetData] = useState("")
-    const { currentUser, logout } = useAuth()
-    const navigate = useNavigate()
-    let { id } = useParams();
- 
-    async function handleLogout() {
-        setError('')
- 
-        try {
-          await logout()
-          navigate('/login')
-        } catch{
-          setError('Logout failed')
-        }
+import { auth, database} from '../firebase'
+import { doc, getDoc } from "firebase/firestore";
+
+
+export default function Homepage() {
+  const [error, setError] = useState("")
+  const [pets, setPets] = useState("")
+  const { currentUser, logout } = useAuth()
+  const navigate = useNavigate()
+  let { id } = useParams()
+  
+  useEffect(() => {
+
+    async function getPet(userId) {
+      let petsData = []
+      const docRef = doc(database, "pets", id);
+      const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        petsData.push({...docSnap.data()})
+        setPets(petsData)
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
       }
- 
-      useEffect(() => {
-        /*fetch('your firebase data', requestOptions, {}).then(res => res.json())
-        .then(result => setPetData(result))*/
-        setPetData(dogObj)
-      }, [])
- 
-    return (
-      <>
-      <main class="main">
-      <body>
-          <aside class="sidebar">
-              <nav class="nav">
-              <ul>
-                  <li><a href="/">Your Pets</a></li>
+    }
+
+    getPet(auth.currentUser.uid)
+  }, [id]);
+
+  
+  async function handleLogout() {
+    try {
+      await logout()
+      navigate('/login')
+    } catch{
+      setError('Logout failed')
+    }
+  }
+
+  return (
+    <>
+    <div className="nicebackground">
+      <main className="main">
+        <body>
+          <aside className="sidebar">
+              <nav className="nav">
+                <ul>
+                  <li><a href="/homepage">Pets</a></li>
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
-                  <li class="active"><a href="/about">About Us</a></li>
-                  <li><button className ="w-100" onClick={handleLogout}   type="submit">Logout</button></li>
-              </ul>
+                  <li><a href="/about">About</a></li>
+                  <li>
+                    <a href="/login"><button onSubmit={handleLogout}>Logout</button></a>
+                  </li>
+                </ul>
               </nav>
-          </aside>
+            </aside>
           </body>
-      </main>
-      <body style={{minHeight: "100vh"}} class="nicebackground d-flex allign-items-center justify-content-center">
-      <h1 class="pet-name">{petData.name}</h1>
-        <table>
-          <tr>
-            <td>Name: </td>
-            <td><p class="pet-breed">{petData.name}</p></td>
-          </tr>
-          <tr>
-            <td>Food:</td>
-            <td><p class="pet-age">{petData.age}</p></td>
-            <td><p class="pet-age">{petData.food}</p></td>
-          </tr>
-        <p class="pet-age">{petData.walkTime}</p>
-        </table>
-      </body>
+        </main>
+        <ul style={{height: "100%"}}>
+          <h2 style={{ fontSize: 25 }} className="text-center mb-4">
+            <img className="logo" src="/logo.png" alt="logo"/>
+          </h2>
+          {Object.keys(pets).map((key) => (
+              <>
+                  <div class="pet-container">
+                    <div class="pet-card">
+                      <img src={pets[key]["petPhoto"]} alt="My Pet"/>
+                      <h1>{pets[key]["petName"]}</h1>
+                      <h2>{pets[key]["petBreed"]}</h2>
+                    </div>
+                  </div>
+                </>
+            ))}
+        </ul>
+    </div>
     </>
-    )
+  )
 }
+ 

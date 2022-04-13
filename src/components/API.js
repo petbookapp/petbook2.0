@@ -1,7 +1,6 @@
 import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, query, where} from "firebase/firestore"; 
 import { auth, database} from '../firebase';
 
-
 export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
     try {
 

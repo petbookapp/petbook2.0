@@ -1,39 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Alert } from "react-bootstrap"
+import { Card, Alert } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { writeUserData } from "./API";
 import { auth, database} from '../firebase'
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
-import { getPets } from "./API"
- 
-const dogs = [
-  {
-    name: 'Floofy',
-    age: 10,
-    breed: 'Golden Retriever'
-  },
-  {
-    name: 'Boop',
-    age: 5,
-    breed: 'Shiba Inu'
-  },
- 
-]
-
-
-// const dogs = getPets(auth.currentUser.uid);
+import { collection, getDocs, query, where} from "firebase/firestore"; 
 
 
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
+  const [petID, setPetID] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
- 
-  async function handleLogout() {
-    setError('')
+  
+  useEffect(() => {
+    getPets(auth.currentUser.uid)
+  }, []);
 
+  
+  async function handleLogout() {
     try {
       await logout()
       navigate('/login')
@@ -41,19 +26,42 @@ export default function Homepage() {
       setError('Logout failed')
     }
   }
- 
+
+  async function getPets(userId) {
+    let petsData = []
+    let petsID = []
+    try {
+        const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
+        getDocs(q)
+          .then((querySnapshot) => {
+            querySnapshot.docs.forEach((doc) => {
+              petsData.push({...doc.data()})
+              petsID.push(doc.id)
+            })
+
+            setPetID(petsID)
+            setPets(petsData)
+        }).catch((err) => {
+          console.log("an error occurred")
+        });
+        
+      } catch (e) {
+        console.error("API ERROR ", e);
+      }
+  }
+
   return (
     <>
-    <div class="nicebackground">
-      <main class="main">
+    <div className="nicebackground">
+      <main className="main">
         <body>
-          <aside class="sidebar">
-              <nav class="nav">
+          <aside className="sidebar">
+              <nav className="nav">
                 <ul>
-                  <li class="active"><a href="/homepage">Your Pets</a></li>
+                  <li className="active"><a href="/homepage">Pets</a></li>
                   <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
-                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/about">About</a></li>
                   <li>
                     <a href="/login"><button onSubmit={handleLogout}>Logout</button></a>
                   </li>
@@ -63,27 +71,26 @@ export default function Homepage() {
           </body>
         </main>
         <ul style={{height: "100%"}}>
-          <h2 style={{ fontSize: 25 }} class="text-center mb-4">
-            <img class="logo" src="logo.png" alt="logo"/>
+          <h2 style={{ fontSize: 25 }} className="text-center mb-4">
+            <img className="logo center-margin" src="logo.png" alt="logo"/>
           </h2>
-          <h2 style={{ fontSize: 20 }} class="text-center mb-4">
-            {currentUser.email} 
-          </h2>
-            {Object.keys(dogs).map((key) => (
+          <div class="container-fluid row row-cols-2 row-cols-sm-3 g-1">
+          {Object.keys(pets).map((key) => (
               <>
                 <Card.Body>
                   {error && <Alert varient="danger">{error}</Alert>}
                   <div class="pet-container">
                     <div class="pet-card">
-                      <img src="https://www.petmd.com/sites/default/files/2020-11/picture-of-golden-retriever-dog_0.jpg" alt="Chyno Deluxe"/>
-                      <h1>{dogs[key]["name"]}</h1>
-                      <h2>{dogs[key]["breed"]} {dogs[key]["age"]}</h2>
-                      <a class="button" href={`/pet-info/${key}`} ><span>+</span> View</a>
+                      <img src={pets[key]["petPhoto"]} alt="My Pet"/>
+                      <h1>{pets[key]["petName"]}</h1>
+                      <h2>{pets[key]["petBreed"]}</h2>
+                      <a class="button" href={`/pet-info/${petID[Number(key)]}`} ><span>+</span> View</a>
                     </div>
                   </div>
                 </Card.Body>
                 </>
             ))}
+            </div>
         </ul>
     </div>
     </>

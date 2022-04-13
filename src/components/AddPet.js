@@ -5,22 +5,17 @@ import { writePet } from "./API"
 import { auth } from '../firebase'
 import { storage } from '../firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
 export default function AddPet(){
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const [setError] = useState("")
+    const { logout } = useAuth()
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
+    const [ setLoading] = useState(false)
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
-
-    const notify = () => {
-        toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
-    }
 
     const handleChange = e => {
         if (e.target.files[0]) {
@@ -39,56 +34,57 @@ export default function AddPet(){
         }
       }
 
-      const handleUpload = (image) => {
-        const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, image)
-        uploadTask.on(
-          "state_changed",
-          snapshot => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-          },
-          error => {
-            console.log(error);
-            alert('an error occured here');
-          },
-          () => {
-              getDownloadURL(uploadTask.snapshot.ref)
-              .then((url) => setUrl(url));
-          }
-        );
-      };
-
       async function handleAddPet(e) {
         e.preventDefault()
+
+        const storageRef = ref(storage, `users/${auth.currentUser.uid}/${image.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, image)
+        uploadTask.on('state_changed', 
+        (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+            case 'paused':
+                console.log('Upload is paused');
+                break;
+            case 'running':
+                console.log('Upload is running');
+                break;
+            default:
+            }
+        }, 
+        (error) => {
+            // Handle unsuccessful uploads
+        }, 
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+                try {
+                    const petName = document.getElementById("petName").value
+                    const petType = document.getElementById("petType").value
+                    const petBreed = document.getElementById("petBreed").value
+                    const petAge = document.getElementById("petAge").value
+                    
+                    writePet(auth.currentUser.uid, petAge, petType, downloadURL, petBreed, petName);
         
-        try {
-            setError("")
-            setLoading(true)
-
-            handleUpload(image);
-
-            const petName = document.getElementById("petName").value
-            const petType = document.getElementById("petType").value
-            const petBreed = document.getElementById("petBreed").value
-            const petAge = document.getElementById("petAge").value
-            
-            writePet(auth.currentUser.uid, petAge, petType, url, petBreed, petName);
-            
-            document.getElementById("petName").value = "";
-            document.getElementById("petType").value = "";
-            document.getElementById("petBreed").value = "";
-            document.getElementById("petAge").value = "";
-            document.getElementById("petPhoto").value = "";
-
-            notify();
-
-        } catch {
-            alert('add pet function didnt work')
+                    document.getElementById("petName").value = "";
+                    document.getElementById("petType").value = "";
+                    document.getElementById("petBreed").value = "";
+                    document.getElementById("petAge").value = "";
+                    document.getElementById("petPhoto").value = "";
+        
+                    toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
+        
+                    } catch {
+                        alert('add pet function didnt work')
+                    }
+            });
         }
-        setLoading(false)
+        );
     }
+
 
     return (
             <>
@@ -97,10 +93,10 @@ export default function AddPet(){
                     <aside class="sidebar">
                         <nav class="nav">
                         <ul>
-                            <li><a href="/homepage">Your Pets</a></li>
+                            <li><a href="/homepage">Pets</a></li>
                             <li class="active"><a href="/add-pet">Add Pet</a></li>
                             <li><a href="/account">Account</a></li>
-                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>
                         </ul>
                         </nav>
@@ -109,8 +105,8 @@ export default function AddPet(){
                 </main>
                 <body style={{minHeight: "100vh"}} class="nicebackground login-form d-flex allign-items-center justify-content-center">
                     <section>
-                        <div class="mycontainer">
-                            <div class="row justify-content-md-center">
+                        <div class="mycontainer ">
+                            <div class="row justify-content-md-center center-margin">
                                 <div class="card-wrapper">
                                     <div class="brand">
                                         <img src="logo.png" alt="logo"/>
@@ -157,7 +153,6 @@ export default function AddPet(){
                                                     <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
                                                         <span>Add Pet</span>
                                                     </button>
-                                                    <ToastContainer />
                                                 </div>
                                             </form>
                                         </div>
