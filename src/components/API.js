@@ -78,7 +78,7 @@ export function deletePet(userId, pName) {
 
 export function getPets(userId) {
   try {
-      const q = query(doc(collection(database, "pets"), where("userAssociation", "==", userId)));
+      const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
       const querySnapshot = getDocs(q);
       console.log(querySnapshot);
       return querySnapshot;
