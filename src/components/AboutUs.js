@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function About(){
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const [setError] = useState("")
+    const { logout } = useAuth()
     const navigate = useNavigate()
 
     async function handleLogout() {

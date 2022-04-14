@@ -10,7 +10,7 @@ export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
   const [petID, setPetID] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { logout } = useAuth()
   const [show, setShow] = useState(false)
   const navigate = useNavigate()
   

@@ -10,8 +10,7 @@ import EditPet from "./EditPet"
 
 
 export default function PetInfo() {
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { logout } = useAuth()
   const navigate = useNavigate()
   const [pet, setPet] = useState("")
   const [show, setShow] = useState(false)
@@ -20,7 +19,7 @@ export default function PetInfo() {
   
   useEffect(() => {
     getPet(id)
-  }, []);
+  }, [id]);
 
   async function getPet(id) {
     let petData = []
@@ -52,7 +51,6 @@ export default function PetInfo() {
       await logout()
       navigate('/login')
     } catch{
-      setError('Logout failed')
     }
   }
 

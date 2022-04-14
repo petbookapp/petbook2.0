@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 import { writePet } from "./API"
 import { auth } from '../firebase'
 import { storage } from '../firebase'
@@ -11,10 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function AddPet(){
-    const [setError] = useState("")
-    const { logout } = useAuth()
-    const navigate = useNavigate()
-    const [ setLoading] = useState(false)
     const [image, setImage] = useState(null);
 
     const handleChange = e => {

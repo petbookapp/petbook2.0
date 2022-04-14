@@ -11,7 +11,7 @@ export default function AddPet(){
     
     useEffect(() => {
         getPet(id)
-    }, []);
+    }, [id]);
 
     async function getPet(id) {
         let petData = []
