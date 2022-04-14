@@ -12,7 +12,7 @@ import Account from "./Account"
 import About from "./AboutUs"
 import AddPet from "./AddPet"
 import LandingPage from "./LandingPage"
-
+import Pet from "./Pet"
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
             <Route path="/pet-info/:id" element={<PetInfo/>}/>
             <Route exact path="/account" element={<Account/>}/>
             <Route exact path="/about" element={<About/>}/>
+            <Route exact path="/pet/:id" element={<Pet/>}/>
           </Routes>
         </AuthProvider>
       </Router>
