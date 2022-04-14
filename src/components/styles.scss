@@ -2,6 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
 
+[contenteditable="true"]:focus {
+  display:block; 
+  position:relative; 
+  background: #fff; 
+  border: 1px solid #999; 
+  }
+  [contenteditable="true"]:focus::before{
+  content:"Edit Me!";
+  }
+
+[contenteditable="true"]:focus > style {
+  display:block;
+  }
 body {
     background-size: cover !important;
 }
@@ -20,6 +33,15 @@ html {
 .center-margin4 {
   margin-left: 100px;
 }
+
+.right-margin {
+  margin-left: 285px;
+}
+
+.left-margin {
+  margin-left: 200px;
+}
+
 
 img.logo{
   width: 200px !important;
@@ -2676,7 +2698,7 @@ main {
       background-color: #f7f7f7 !important;
   }
   .text-center {
-      text-align: center!important !important;
+      text-align: center!important;
   }
   img {
       max-width: 100% !important;
@@ -2846,6 +2868,23 @@ main {
     font-weight: 700 !important;
     font-size: 13px !important;
     background-color: rgba(255,182,5)!important;
+    padding: 5px 55px !important;
+    margin-left: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.20) !important;
+  }
+
+  button3{
+    border: none !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    outline: none !important;
+    overflow: hidden !important;
+    position: relative !important;
+    color: rgb(255, 255, 255) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    background-color: rgb(59, 197, 24) !important;
     padding: 5px 55px !important;
     margin-left: 5px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.20) !important;

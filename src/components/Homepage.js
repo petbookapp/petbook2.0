@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Alert } from "react-bootstrap"
+import { Card, Alert, Modal } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { auth, database} from '../firebase'
 import { collection, getDocs, query, where} from "firebase/firestore"; 
-
+import AddPet from "./AddPet"
 
 export default function Homepage() {
   const [error, setError] = useState("")
   const [pets, setPets] = useState("")
   const [petID, setPetID] = useState("")
   const { currentUser, logout } = useAuth()
+  const [show, setShow] = useState(false)
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -50,8 +51,16 @@ export default function Homepage() {
       }
   }
 
+  function close() {
+    getPets(auth.currentUser.uid)
+    closeAdd()
+  }
+
+  const showAdd = () => setShow(true)
+  const closeAdd = () => setShow(false)
   return (
     <>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <div className="nicebackground">
       <main className="main">
         <body>
@@ -59,7 +68,6 @@ export default function Homepage() {
               <nav className="nav">
                 <ul>
                   <li className="active"><a href="/homepage">Pets</a></li>
-                  <li><a href="/add-pet">Add Pet</a></li>
                   <li><a href="/account">Account</a></li>
                   <li><a href="/about">About</a></li>
                   <li>
@@ -71,8 +79,14 @@ export default function Homepage() {
           </body>
         </main>
         <ul style={{height: "100%"}}>
-          <h2 style={{ fontSize: 25 }} className="text-center mb-4">
-            <img className="logo center-margin" src="logo.png" alt="logo"/>
+          <h2>
+            <div className="team-single">
+              <i class="fas fa-solid fa-plus text-green left-margin"></i>
+              <strong class="text-green"><button3 onClick={showAdd} className="greenColor">Add Pet</button3></strong>
+              <img className="logo right-margin" src="logo.png" alt="logo"/>
+            </div>
+            
+            
           </h2>
           <div class="container-fluid row row-cols-2 row-cols-sm-3 g-1">
           {Object.keys(pets).map((key) => (
@@ -93,6 +107,17 @@ export default function Homepage() {
             </div>
         </ul>
     </div>
+
+    <Modal show={show} onHide={close}>
+      <Modal.Header closeButton>
+        <Modal.Title>
+          Add Pet
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <AddPet />
+      </Modal.Body>
+    </Modal>
     </>
   )
 }

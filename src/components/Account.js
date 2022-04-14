@@ -46,7 +46,6 @@ export default function Account(){
                     <nav class="nav">
                     <ul>
                         <li><a href="/homepage">Pets</a></li>
-                        <li><a href="/add-pet">Add Pet</a></li>
                         <li class="active"><a href="/account">Account</a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>

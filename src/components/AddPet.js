@@ -23,17 +23,6 @@ export default function AddPet(){
         }
     };
 
-    async function handleLogout() {
-        setError('')
-    
-        try {
-          await logout()
-          navigate('/login')
-        } catch{
-          setError('Logout failed')
-        }
-      }
-
       async function handleAddPet(e) {
         e.preventDefault()
 
@@ -88,80 +77,53 @@ export default function AddPet(){
 
     return (
             <>
-                <main class="main">
-                <body>
-                    <aside class="sidebar">
-                        <nav class="nav">
-                        <ul>
-                            <li><a href="/homepage">Pets</a></li>
-                            <li class="active"><a href="/add-pet">Add Pet</a></li>
-                            <li><a href="/account">Account</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>
-                        </ul>
-                        </nav>
-                    </aside>
-                </body>
-                </main>
-                <body style={{minHeight: "100vh"}} class="nicebackground login-form d-flex allign-items-center justify-content-center">
-                    <section>
-                        <div class="mycontainer ">
-                            <div class="row justify-content-md-center center-margin">
-                                <div class="card-wrapper">
-                                    <div class="brand">
-                                        <img src="logo.png" alt="logo"/>
-                                    </div>
-                                    <div class="card fat">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Add Pet</h4>
-                                            <form class="login-form">
-                                                <div class="form-group">
-                                                    <label for="petName">Name</label>
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    <input id="petName" placeHolder="Name" type="petName" class="form-control" name="petName"  required autofocus/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group">
-                                                    <label for="petAge">Pet Photo
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    </label>
-                                                    <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group">
-                                                    <label for="petAge">Type of Pet
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    </label>
-                                                    <input id="petType" placeHolder="Type of Pet" type="petType" class="form-control" name="petType" required data-eye/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group">
-                                                    <label for="petBreed">Breed
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    </label>
-                                                    <input id="petBreed" placeHolder="Breed" type="petBreed" class="form-control" name="petBreed" required data-eye/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group">
-                                                    <label for="petAge">Age
-                                                    <div className= "w-100 text-center mt-2"></div>
-                                                    </label>
-                                                    <input id="petAge" placeHolder="Age" type="petAge" class="form-control" name="petAge" required data-eye/>
-                                                </div>
-                                                <div className= "w-100 text-center mt-2"></div>
-                                                <div class="form-group m-0">
-                                                    <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
-                                                        <span>Add Pet</span>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <form class="login-form">
+                            <div class="form-group">
+                                <label for="petName">Name</label>
+                                <div className= "w-100 text-center mt-2"></div>
+                                <input id="petName" placeHolder="Name" type="petName" class="form-control" name="petName"  required autofocus/>
                             </div>
-                        </div>
-                    </section>
-                </body>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petAge">Pet Photo
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petAge">Type of Pet
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petType" placeHolder="Type of Pet" type="petType" class="form-control" name="petType" required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petBreed">Breed
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petBreed" placeHolder="Breed" type="petBreed" class="form-control" name="petBreed" required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petAge">Age
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petAge" placeHolder="Age" type="petAge" class="form-control" name="petAge" required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group m-0">
+                                <button type="submit" style={{width:"320px", height:"50px"}}onClick={handleAddPet} class="btn btn-primary btn-block">
+                                    <span>Add Pet</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             </>
     )
 }

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Alert } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { auth, database} from '../firebase'
-import { doc, getDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import EditPet from "./EditPet"
 
 
 export default function Homepage() {
@@ -11,6 +14,8 @@ export default function Homepage() {
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
   const [pet, setPet] = useState("")
+  const [show, setShow] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
   let { id } = useParams()
   
   useEffect(() => {
@@ -24,14 +29,24 @@ export default function Homepage() {
       const snapshot = await getDoc(docRef)
       
       petData.push({...snapshot.data()})
-      console.log(petData[0].petName)
       setPet(petData)
       
     } catch {
       console.log("No such document!");
     }
   }
-  
+  async function deletePet() {
+    try{
+      const docRef = doc(database, "pets", id)
+      await deleteDoc(docRef)
+      .then(()=> {
+        navigate("/homepage");
+        toast.info("Pet Deleted", {position: toast.POSITION.BOTTOM_CENTER});
+      })
+    } catch {
+
+    }
+  }
   async function handleLogout() {
     try {
       await logout()
@@ -40,6 +55,17 @@ export default function Homepage() {
       setError('Logout failed')
     }
   }
+
+  function close() {
+    getPet(id)
+    closeEdit()
+  }
+
+  const showEdit = () => setShow(true)
+  const closeEdit = () => setShow(false)
+  
+  const openDelete = () => setShowDelete(true)
+  const closeDelete = () => setShowDelete(false)
 
   return (
     <>
@@ -51,7 +77,6 @@ export default function Homepage() {
                 <nav className="nav">
                   <ul>
                     <li className="active"><a href="/homepage">Pets</a></li>
-                    <li><a href="/add-pet">Add Pet</a></li>
                     <li><a href="/account">Account</a></li>
                     <li><a href="/about">About</a></li>
                     <li>
@@ -82,11 +107,11 @@ export default function Homepage() {
                                     <div class="row">
                                         <div class="col-md-5 col-5">
                                           <i class="fas fa-solid fa-trash text-black"></i>
-                                          <strong class="margin-10px-left text-orange"><button>Delete</button></strong>
+                                          <strong class="margin-10px-left text-orange"><button onClick={openDelete}>Delete</button></strong>
                                         </div>
                                         <div class="col-md-7 col-7">
                                           <i class="fas fa-solid fa-pen text-blue"></i>
-                                          <strong class="margin-10px-left text-orange"><button2 className='edit'>Edit</button2></strong>
+                                          <strong class="margin-10px-left text-orange"><button2 onClick={showEdit} className='edit'>Edit</button2></strong>
                                         </div>
                                     </div>
 
@@ -99,7 +124,7 @@ export default function Homepage() {
                                                     <strong class="margin-10px-left text-orange">Name:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petName"]}</p>
+                                                    <p>{pet[key]["petName"]} </p>
                                                 </div>
                                             </div>
 
@@ -175,6 +200,30 @@ export default function Homepage() {
                         <div class="col-md-12"></div>
                     </div>
                 </div>
+                <Modal show={show} onHide={close}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      Edit Pet
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <EditPet />
+                  </Modal.Body>
+                </Modal>
+
+                <Modal show={showDelete} onHide={closeDelete}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      Delete Pet
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    Are you sure you want to delete this pet ?
+                  </Modal.Body>
+                  <Modal.Footer>
+                  <Button className="btn btn-dark" onClick={closeDelete}>Cancel</Button><Button onClick={deletePet} className="btn-danger">Yes</Button>
+                  </Modal.Footer>
+                </Modal>
                 </>
             ))}
       </div>
