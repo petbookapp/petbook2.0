@@ -49,14 +49,18 @@ export default function AddPet(){
                     const petType = document.getElementById("petType").value
                     const petBreed = document.getElementById("petBreed").value
                     const petAge = document.getElementById("petAge").value
+                    const petGender = document.getElementById("petGender").value
+                    const petWeight = document.getElementById("petWeight").value
                     
-                    writePet(auth.currentUser.uid, petAge, petType, downloadURL, petBreed, petName);
+                    writePet(auth.currentUser.uid, petAge, petType, downloadURL, petBreed, petName, petGender, petWeight);
         
                     document.getElementById("petName").value = "";
                     document.getElementById("petType").value = "";
                     document.getElementById("petBreed").value = "";
                     document.getElementById("petAge").value = "";
                     document.getElementById("petPhoto").value = "";
+                    document.getElementById("petGender").value = "";
+                    document.getElementById("petWeight").value = "";
         
                     toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
         
@@ -107,6 +111,20 @@ export default function AddPet(){
                                 <div className= "w-100 text-center mt-2"></div>
                                 </label>
                                 <input id="petAge" placeHolder="Age" type="petAge" class="form-control" name="petAge" required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petGender">Gender
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petGender" placeHolder="Gender" type="petGender" class="form-control" name="petGender" required data-eye/>
+                            </div>
+                            <div className= "w-100 text-center mt-2"></div>
+                            <div class="form-group">
+                                <label for="petWeight">Weight
+                                <div className= "w-100 text-center mt-2"></div>
+                                </label>
+                                <input id="petWeight" placeHolder="Weight" type="petWeight" class="form-control" name="petWeight" required data-eye/>
                             </div>
                             <div className= "w-100 text-center mt-2"></div>
                             <div class="form-group m-0">

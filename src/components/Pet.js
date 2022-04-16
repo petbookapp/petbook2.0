@@ -8,7 +8,7 @@ export default function Pet() {
   const [pet, setPet] = useState("")
   const [userId, setUID] = useState("")
   const [Name, setName] = useState("")
-  const [Email, setEmail] = useState("")
+  const [Phone, setPhone] = useState("")
   let { id } = useParams()
   
   useEffect(() => {
@@ -19,13 +19,13 @@ export default function Pet() {
   async function getPet(id) {
     let petData = []
     try {
-      const docRef = doc(database, "pets", id);
-      const snapshot = await getDoc(docRef)
-      
-      petData.push({...snapshot.data()})
-
-      setUID(petData[0]["userAssociation"])
-      setPet(petData)
+        const docRef = doc(database, "pets", id);
+        const snapshot = await getDoc(docRef)
+        
+        petData.push({...snapshot.data()})
+        //alert(petData[0]["userAssociation"][0])
+        //setUID(JSON.stringify(petData[0]["userAssociation"]))
+        setPet(petData)
       
     } catch {
       console.log("No such document!");
@@ -41,12 +41,13 @@ export default function Pet() {
       userData.push({...snapshot.data()})
 
       setName(userData[0]["display_name"])
-      setEmail(userData[0]["email"])
+      setPhone(userData[0]["phone_number"])
       
     } catch {
       console.log("No such document!");
     }
   }
+
   return (
     <>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
@@ -108,7 +109,6 @@ export default function Pet() {
 
                                         </li>
                                         <li>
-
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
                                                     <i class="fas fa-file text-green"></i>
@@ -121,7 +121,28 @@ export default function Pet() {
 
                                         </li>
                                         <li>
-
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-file text-green"></i>
+                                                    <strong class="margin-10px-left text-green">Gender:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>{pet[key]["petGender"]}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-file text-green"></i>
+                                                    <strong class="margin-10px-left text-green">Weight:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>{pet[key]["petWeight"]}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
                                                     <i class="fas fa-user text-purple"></i>
@@ -136,11 +157,11 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-envelope text-pink"></i>
-                                                    <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
+                                                    <i class="fas fa-mobile text-green"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-green">Phone Number:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p><a href="/homepage">{Email}</a></p>
+                                                    <p>{Phone}</p>
                                                 </div>
                                             </div>
                                         </li>

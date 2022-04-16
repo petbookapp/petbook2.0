@@ -3,7 +3,7 @@ import { Card, Alert, Modal } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { auth, database} from '../firebase'
-import { collection, getDocs, query, where} from "firebase/firestore"; 
+import { collection, getDocs, query, where, doc} from "firebase/firestore"; 
 import AddPet from "./AddPet"
 
 export default function Homepage() {
@@ -32,7 +32,7 @@ export default function Homepage() {
     let petsData = []
     let petsID = []
     try {
-        const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
+        const q = query(collection(database, "pets"), where("userAssociation", "==", doc(database, "users", auth.currentUser.uid)));
         getDocs(q)
           .then((querySnapshot) => {
             querySnapshot.docs.forEach((doc) => {

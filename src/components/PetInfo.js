@@ -13,13 +13,32 @@ export default function PetInfo() {
   const { logout } = useAuth()
   const navigate = useNavigate()
   const [pet, setPet] = useState("")
+  const [Name, setName] = useState("")
+  const [Phone, setPhone] = useState("")
   const [show, setShow] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
   let { id } = useParams()
   
   useEffect(() => {
     getPet(id)
+    getUser()
   }, [id]);
+
+  async function getUser() {
+    let userData = []
+    try {
+      const docRef = doc(database, "users", auth.currentUser.uid);
+      const snapshot = await getDoc(docRef)
+      
+      userData.push({...snapshot.data()})
+
+      setName(userData[0]["display_name"])
+      setPhone(userData[0]["phone_number"])
+      
+    } catch {
+      console.log("No such document!");
+    }
+  }
 
   async function getPet(id) {
     let petData = []
@@ -144,8 +163,8 @@ export default function PetInfo() {
 
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-lightred"></i>
-                                                    <strong class="margin-10px-left text-lightred">Breed:</strong>
+                                                    <i class="fas fa-file text-green"></i>
+                                                    <strong class="margin-10px-left text-green">Breed:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petBreed"]}</p>
@@ -157,8 +176,8 @@ export default function PetInfo() {
 
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-green"></i>
-                                                    <strong class="margin-10px-left text-green">Age:</strong>
+                                                    <i class="fas fa-file text-pink"></i>
+                                                    <strong class="margin-10px-left text-pink">Age:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petAge"]}</p>
@@ -167,14 +186,35 @@ export default function PetInfo() {
 
                                         </li>
                                         <li>
-
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-user text-purple"></i>
-                                                    <strong class="margin-10px-left xs-margin-four-left text-purple">Owner:</strong>
+                                                    <i class="fas fa-file text-lightred"></i>
+                                                    <strong class="margin-10px-left text-lightred">Gender:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{auth.currentUser.displayName}</p>
+                                                    <p>{pet[key]["petGender"]}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-file text-purple"></i>
+                                                    <strong class="margin-10px-left text-purple">Weight:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>{pet[key]["petWeight"]}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5 col-5">
+                                                    <i class="fas fa-user text-green"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-green">Owner:</strong>
+                                                </div>
+                                                <div class="col-md-7 col-7">
+                                                    <p>{Name}</p>
                                                 </div>
                                             </div>
 
@@ -182,11 +222,11 @@ export default function PetInfo() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-envelope text-pink"></i>
-                                                    <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
+                                                    <i class="fas fa-mobile text-pink"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-pink">Phone Number:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p><a href="/homepage">{auth.currentUser.email}</a></p>
+                                                    <p>{Phone}</p>
                                                 </div>
                                             </div>
                                         </li>

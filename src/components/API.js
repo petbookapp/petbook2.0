@@ -1,16 +1,17 @@
 import { collection, addDoc, doc, getDoc, getDocs, setDoc, updateDoc, query, where} from "firebase/firestore"; 
-import { database} from '../firebase';
+import { database, auth} from '../firebase';
 
-export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
+export function writePet(userId, pAge, pType, pPhoto, pBreed, pName, pGender, pWeight) {
     try {
-
       const docRef = addDoc(collection(database, "pets"), {
         petAge: pAge,
         petName: pName,
         petPhoto: pPhoto,
+        petWeight: pWeight,
+        petGender: pGender,
         petType: pType,
         petBreed: pBreed,
-        userAssociation: userId,
+        userAssociation: doc(database, "users", auth.currentUser.uid),
       }); 
 
         console.log("Document written with ID: ", docRef.id);
@@ -19,14 +20,14 @@ export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
       }
 }
 
-export function writeUserData(user, name, email) {
+export function writeUserData(user, name, email, phoneNumber) {
     try {
         const docRef = setDoc(doc(collection(database, "users"), user.uid), {
           bio: "",
           created_time: user.metadata.creationTime,          
           display_name: name,
           email: email,
-          phone_number: "123456789",
+          phone_number: phoneNumber,
           photo_url: "",
           uid: user.uid,
         });
@@ -77,7 +78,7 @@ export function deletePet(userId, pName) {
 
 export function getPets(userId) {
   try {
-      const q = query(collection(database, "pets"), where("userAssociation", "==", userId));
+      const q = query(collection(database, "pets"), where("userAssociation", "==", database.DocumentReference('/users/' + userId)));
       const querySnapshot = getDocs(q);
       console.log(querySnapshot);
       return querySnapshot;

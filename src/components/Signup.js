@@ -1,18 +1,15 @@
 import React, { useState } from "react"
-import { useForm } from "react-hook-form";
 import { Alert } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import GoogleButton from 'react-google-button'
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { auth, database} from '../firebase'
+import { auth } from '../firebase'
 import { onAuthStateChanged } from "firebase/auth";
-import { set, ref } from 'firebase/database'
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
 import { writeUserData } from "./API";
 import { errorMessage } from "../context/AuthContext"
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
@@ -23,16 +20,17 @@ export default function Signup() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [passwordShown, setPasswordShown] = useState(false)
-    const [passwordShown2, setPasswordShown2] = useState(false)
 
     const navigate = useNavigate();
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            const userName = document.getElementById("name").value
+            const phoneNumber = document.getElementById("phoneNumber").value
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
         //   console.log(user.metadata.creationTime);
-          writeUserData(user, "bob", user.email)
+          writeUserData(user, userName, user.email, phoneNumber)
           
         } else {
           // User is signed out
@@ -42,11 +40,6 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if(document.getElementById("password").value !==
-        document.getElementById("confirm-password").value) {
-            document.getElementById("passwordConfirmError").innerHTML = 'Passwords do not match';
-            return;
-        }
         try {
             setError("")
             setLoading(true)
@@ -61,7 +54,8 @@ export default function Signup() {
             // )
             // alert(auth.currentUser.id);
 
-            navigate('/emailverification');
+            navigate('/login');
+            toast.info('A Verifification Link Has Been Sent To Your Email', {position: toast.POSITION.BOTTOM_CENTER})
         } catch {
             if(errorMessage === '1') {
                 document.getElementById("passwordError").innerHTML = 'Passwords must be at least 6 characters long';
@@ -88,12 +82,6 @@ export default function Signup() {
         setPasswordShown(passwordShown ? false : true);
       };
 
-    const togglePasswordVisiblity2 = () => {
-        setPasswordShown2(passwordShown2 ? false : true);
-      };
-
-      
-
     return (
         <>
             <html lang="en">
@@ -119,6 +107,10 @@ export default function Signup() {
                                                     <input id="name" placeHolder="Name" type="name" class="form-control" name="name"  required autofocus/>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="phoneNumber">Phone Number</label>
+                                                    <input id="phoneNumber" placeHolder="Phone Number" type="phoneNumber" class="form-control" name="phoneNumber"  required autofocus/>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="email">Email Address</label>
                                                     <input id="email" placeHolder="Email Address" type="email" class="form-control" name="email"  required autofocus/>
                                                     <p><span class="error text-danger" id="emailError"></span></p>
@@ -130,15 +122,6 @@ export default function Signup() {
                                                     <i onClick={togglePasswordVisiblity}>{eye}</i>
                                                     <p><span class="error text-danger" id="passwordError"></span></p>
                                                 </div>
-
-                                                <div class="form-group confirm">
-                                                    <label for="password">Confirm Password
-                                                    </label>
-                                                    <input id="confirm-password" placeHolder="Confirm Password" type={passwordShown2 ? "text" : "password"} class="form-control" name="confirm-password" required data-eye/>
-                                                    <i onClick={togglePasswordVisiblity2}>{eye}</i>
-                                                    <p><span class="error text-danger" id="passwordConfirmError"></span></p>
-                                                </div>
-
                                                 <div class="form-group m-0">
                                                     <button type="submit" disabled={loading} onClick={handleSubmit} class="btn btn-primary btn-block">
                                                         <span>Sign Up</span>
