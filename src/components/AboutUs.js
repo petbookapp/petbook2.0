@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function About(){
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const [setError] = useState("")
+    const { logout } = useAuth()
     const navigate = useNavigate()
 
     async function handleLogout() {
@@ -26,7 +26,6 @@ export default function About(){
                 <nav class="nav">
                 <ul>
                     <li><a href="/homepage">Pets</a></li>
-                    <li><a href="/add-pet">Add Pet</a></li>
                     <li><a href="/account">Account</a></li>
                     <li class="active"><a href="/about">About</a></li>
                     <li><a href="/login"><button onSubmit={handleLogout}>Logout</button></a></li>
