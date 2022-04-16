@@ -19,22 +19,7 @@ export function writePet(userId, pAge, pType, pPhoto, pBreed, pName) {
       }
 }
 
-export function writeUserData(user, name, email) {
-    try {
-        const docRef = setDoc(doc(collection(database, "users"), user.uid), {
-          bio: "",
-          created_time: user.metadata.creationTime,          
-          display_name: name,
-          email: email,
-          phone_number: "123456789",
-          photo_url: "",
-          uid: user.uid,
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-}
+
 
 export function updateUser(userId, name, email)
 {
