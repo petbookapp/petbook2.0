@@ -1,13 +1,23 @@
 {
   "files": {
-    "main.css": "./static/css/main.1a8a0596.css",
-    "main.js": "./static/js/main.ab6a2b4c.js",
+    "main.css": "./static/css/main.2623daa4.css",
+    "main.js": "./static/js/main.c727313e.js",
+    "static/media/background.png": "./static/media/background.243b1dfb5ff97f712c28.png",
+    "static/media/iphone-banner.png": "./static/media/iphone-banner.ea6f2b34aa4d136d60f0.png",
+    "static/media/iphone-feature.png": "./static/media/iphone-feature.d74bc27c11a44ccaa7f2.png",
+    "static/media/desk-bg.jpg": "./static/media/desk-bg.31c307be4d8e0820ac4d.jpg",
+    "static/media/elipse-bg.png": "./static/media/elipse-bg.c50e66d786284acc6d01.png",
+    "static/media/elipse-bg-three.png": "./static/media/elipse-bg-three.bf5e75eb3b51157fa18b.png",
+    "static/media/googleplay.svg": "./static/media/googleplay.f4734b1f54ed83fe5cd18eaaf1295658.svg",
+    "static/media/i-phone-screen.png": "./static/media/i-phone-screen.16276c6569cb98d4f46a.png",
+    "static/media/banner-bg-two.jpg": "./static/media/banner-bg-two.5d5068397ff92767edcf.jpg",
+    "static/media/applestore.svg": "./static/media/applestore.8a23b80dcf4e96a3cd95eae6aac4f9ff.svg",
     "index.html": "./index.html",
-    "main.1a8a0596.css.map": "./static/css/main.1a8a0596.css.map",
-    "main.ab6a2b4c.js.map": "./static/js/main.ab6a2b4c.js.map"
+    "main.2623daa4.css.map": "./static/css/main.2623daa4.css.map",
+    "main.c727313e.js.map": "./static/js/main.c727313e.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a8a0596.css",
-    "static/js/main.ab6a2b4c.js"
+    "static/css/main.2623daa4.css",
+    "static/js/main.c727313e.js"
   ]
 }
