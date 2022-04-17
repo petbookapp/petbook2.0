@@ -21,10 +21,8 @@ export default function Pet() {
     try {
         const docRef = doc(database, "pets", id);
         const snapshot = await getDoc(docRef)
-        
         petData.push({...snapshot.data()})
-        //alert(petData[0]["userAssociation"][0])
-        //setUID(JSON.stringify(petData[0]["userAssociation"]))
+        setUID(petData[0]["userAssociation"])
         setPet(petData)
       
     } catch {
@@ -35,8 +33,7 @@ export default function Pet() {
   async function getUser(user) {
     let userData = []
     try {
-      const docRef = doc(database, "users", user);
-      const snapshot = await getDoc(docRef)
+      const snapshot = await getDoc(user)
       
       userData.push({...snapshot.data()})
 
@@ -99,8 +96,8 @@ export default function Pet() {
 
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-lightred"></i>
-                                                    <strong class="margin-10px-left text-lightred">Breed:</strong>
+                                                    <i class="fas fa-file text-green"></i>
+                                                    <strong class="margin-10px-left text-green">Breed:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petBreed"]}</p>
@@ -111,8 +108,8 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-green"></i>
-                                                    <strong class="margin-10px-left text-green">Age:</strong>
+                                                    <i class="fas fa-file text-pink"></i>
+                                                    <strong class="margin-10px-left text-pink">Age:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petAge"]}</p>
@@ -123,8 +120,8 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-green"></i>
-                                                    <strong class="margin-10px-left text-green">Gender:</strong>
+                                                    <i class="fas fa-file text-lightred"></i>
+                                                    <strong class="margin-10px-left text-lightred">Gender:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petGender"]}</p>
@@ -134,8 +131,8 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-file text-green"></i>
-                                                    <strong class="margin-10px-left text-green">Weight:</strong>
+                                                    <i class="fas fa-file text-purple"></i>
+                                                    <strong class="margin-10px-left text-purple">Weight:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{pet[key]["petWeight"]}</p>
@@ -145,8 +142,8 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-user text-purple"></i>
-                                                    <strong class="margin-10px-left xs-margin-four-left text-purple">Owner:</strong>
+                                                    <i class="fas fa-user text-green"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-green">Owner:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{Name}</p>
@@ -157,8 +154,8 @@ export default function Pet() {
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
-                                                    <i class="fas fa-mobile text-green"></i>
-                                                    <strong class="margin-10px-left xs-margin-four-left text-green">Phone Number:</strong>
+                                                    <i class="fas fa-mobile text-pink"></i>
+                                                    <strong class="margin-10px-left xs-margin-four-left text-pink">Phone Number:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
                                                     <p>{Phone}</p>
