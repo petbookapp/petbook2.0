@@ -62,7 +62,7 @@ export default function AddPet(){
                     document.getElementById("petGender").value = "";
                     document.getElementById("petWeight").value = "";
         
-                    toast.success("Pet Added!", {position: toast.POSITION.BOTTOM_CENTER});
+                    toast.success("Pet Added!", {position: toast.POSITION.TOP_RIGHT});
         
                     } catch {
                         alert('add pet function didnt work')

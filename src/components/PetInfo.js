@@ -59,7 +59,7 @@ export default function PetInfo() {
       await deleteDoc(docRef)
       .then(()=> {
         navigate("/homepage");
-        toast.info("Pet Deleted", {position: toast.POSITION.BOTTOM_CENTER});
+        toast.info("Pet Deleted", {position: toast.POSITION.TOP_RIGHT});
       })
     } catch {
 
