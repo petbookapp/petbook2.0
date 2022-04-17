@@ -1,12 +1,20 @@
 {
   "hosting": {
     "public": "build",
+    "headers": [
+      {"source": "/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}]}
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
-<<<<<<< HEAD
+    ],
+    "rewrites": [
+      {
+          "source": "**",
+          "destination": "/index.html"
+      }
+  ]
   },
   "emulators": {
     "functions": {
@@ -21,7 +29,5 @@
     "ui": {
       "enabled": true
     }
-=======
->>>>>>> ddccfbe8916db4d0e397f617282135c903ec952e
   }
 }
