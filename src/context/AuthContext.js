@@ -67,7 +67,7 @@ export function AuthProvider({ children }) {
     }
    
     function logout() {
-        return auth.currentUser.signOut()
+        return auth.signOut()
     }
 
     async function resetPassword(email) {

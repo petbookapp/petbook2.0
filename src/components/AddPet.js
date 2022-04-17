@@ -89,7 +89,7 @@ export default function AddPet(){
                                 <label for="petAge">Pet Photo
                                 <div className= "w-100 text-center mt-2"></div>
                                 </label>
-                                <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange} required data-eye/>
+                                <input id="petPhoto"  type="file" class="form-control" name="petPhoto" onChange={handleChange}/>
                             </div>
                             <div className= "w-100 text-center mt-2"></div>
                             <div class="form-group">
