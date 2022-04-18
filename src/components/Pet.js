@@ -18,7 +18,6 @@ export default function PetInfo() {
   const [petAge, setAge] = useState("")
   const [petPhoto, setPhoto] = useState("")
   const [Phone, setPhone] = useState("")
-  const [show, setShow] = useState(false)
   let { id } = useParams()
   
   useEffect(() => {
@@ -84,21 +83,7 @@ export default function PetInfo() {
                             <div class="team-single-text padding-50px-left sm-no-padding-left">
                                 <div class="contact-info-section margin-40px-tb">
                                     <ul class="list-style9 no-margin">
-                                    <li>
-                                    <div class="row">
-                                        <div class="col-md-5 col-5">
-                                          <i class="fas fa-solid fa-trash text-black"></i>
-                                          <strong class="margin-10px-left text-orange"><button onClick={openDelete}>Delete</button></strong>
-                                        </div>
-                                        <div class="col-md-7 col-7">
-                                          <i class="fas fa-solid fa-pen text-blue"></i>
-                                          <strong class="margin-10px-left text-orange"><button2 onClick={showEdit} className='edit'>Edit</button2></strong>
-                                        </div>
-                                    </div>
-
-                                    </li>
                                         <li>
-
                                             <div class="row">
                                                 <div class="col-md-5 col-5">
                                                     <i class="fas fa-solid fa-file text-orange"></i>
