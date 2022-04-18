@@ -55,7 +55,7 @@ export default function Signup() {
             // alert(auth.currentUser.id);
 
             navigate('/login');
-            toast.info('A Verifification Link Has Been Sent To Your Email', {position: toast.POSITION.BOTTOM_CENTER})
+            toast.info('A Verification Link Has Been Sent To Your Email', {position: toast.POSITION.BOTTOM_CENTER})
         } catch {
             if(errorMessage === '1') {
                 document.getElementById("passwordError").innerHTML = 'Passwords must be at least 6 characters long';
