@@ -77,6 +77,12 @@ background-size: cover !important;
 -o-background-size: cover !important;
 }
 
+.aboutus-container .fat{
+  min-width: 150%;
+
+  padding: 90px 10px !important;
+}
+
 .login-form .brand {
 	width: 200px !important;
 	height: 80px !important;
@@ -333,6 +339,7 @@ main {
 
     li {
       position: relative !important;
+      right: -28px;
       margin: 4.2em 0 !important;
   
       button {
@@ -349,6 +356,7 @@ main {
         font-size: 13px !important;
         background-color: #000 !important;
         padding: 7px 23px !important;
+        right: -4px;
         margin: 0 auto !important;
         box-shadow: 0 5px 15px rgba(0,0,0,0.20) !important;
       }
@@ -396,7 +404,7 @@ main {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  background-color: color(#f9f9f9) !important;
+  background-color: color(#F7EDE2) !important;
   height: 100% !important;
 
   @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600");

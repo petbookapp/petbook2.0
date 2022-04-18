@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 
@@ -95,7 +96,7 @@ export default function Signup() {
                             <div class="row justify-content-md-center h-100">
                                 <div class="card-wrapper">
                                     <div class="brand">
-                                        <img src="logo.png" alt="logo"/>
+                                        <Link to="/"><img src="logo.png" alt="logo"/></Link>
                                     </div>
                                     <div class="card fat">
                                         <div class="card-body">

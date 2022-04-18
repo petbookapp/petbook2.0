@@ -61,7 +61,6 @@ export default function Homepage() {
   return (
     <>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <div className="nicebackground">
       <main className="main">
         <body>
           <aside className="sidebar">
@@ -78,6 +77,7 @@ export default function Homepage() {
             </aside>
           </body>
         </main>
+        
         <ul style={{height: "100%"}}>
           <h2>
             <div className="team-single">
@@ -85,9 +85,9 @@ export default function Homepage() {
               <strong class="text-green"><button3 onClick={showAdd} className="greenColor">Add Pet</button3></strong>
               <img className="logo right-margin" src="logo.png" alt="logo"/>
             </div>
-            
-            
           </h2>
+        </ul>
+        <div className="nicebackground">
           <div class="container-fluid row row-cols-2 row-cols-sm-3 g-1">
           {Object.keys(pets).map((key) => (
               <>
@@ -105,7 +105,7 @@ export default function Homepage() {
                 </>
             ))}
             </div>
-        </ul>
+        
     </div>
 
     <Modal show={show} onHide={close}>
