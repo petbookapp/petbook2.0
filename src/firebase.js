@@ -4,13 +4,14 @@ import {getFirestore} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyC5r3y-xuGnSjXSAc-Khae5HTa0Yu8s0kA",
-    authDomain: "petbookweb-9621c.firebaseapp.com",
-    projectId: "petbookweb-9621c",
-    storageBucket: "petbookweb-9621c.appspot.com",
-    messagingSenderId: "718590839151",
-    appId: "1:718590839151:web:5d874c1cd6776c5a2dc09a",
-    measurementId: "G-Q2CRJ5EFBQ"
+  apiKey: "AIzaSyByhVDppQflaACGxE0TK45KEAHWh7ASv6I",
+  authDomain: "group1-3548e.firebaseapp.com",
+  databaseURL: "https://group1-3548e-default-rtdb.firebaseio.com",
+  projectId: "group1-3548e",
+  storageBucket: "group1-3548e.appspot.com",
+  messagingSenderId: "513050052130",
+  appId: "1:513050052130:web:d40afad04639e68fd7ac7b",
+  measurementId: "G-JV72FRF550"
   });
 
   export const auth = app.auth();
