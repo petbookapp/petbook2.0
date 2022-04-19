@@ -214,7 +214,7 @@ export default function LandingPage(){
             
                                 <div class="content">
                                     <h5>IOS and android version </h5>
-                                    <p>Download on either Google play or Apple app store (Mentira -Leo)</p>
+                                    <p>Download on either Google play or Apple app store</p>
                                 </div>
                             </div>
                         </div>
