@@ -66,8 +66,8 @@ export default function LandingPage(){
                     <div class="row">
                         <div class="col-md-8 align-self-center">
                             <div class="content-block">
-                                <h1>Pet care made simple</h1>
-                                <h5>Try it in the app:</h5>
+                                <h2 class="header-text">Keep tabs on your pets while creating a timeline of memories with them</h2><br/>
+            
                                 <div class="app-badge">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -213,8 +213,8 @@ export default function LandingPage(){
                                 </div>
             
                                 <div class="content">
-                                    <h5>IOS and android version </h5>
-                                    <p>Download on either Google play or Apple app store</p>
+                                    <h5>IOS and Android version</h5>
+                                    <p>We prioritized the mobile app first. Petbook is functional on both platforms.</p>
                                 </div>
                             </div>
                         </div>

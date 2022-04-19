@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
 
 [contenteditable="true"]:focus {
   display:block; 
@@ -493,6 +494,8 @@ main {
  
 }
 
+/*LANDING PAGE CSS*/
+
 .landing {
   @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700|Open+Sans:400,400i,700");
   body {
@@ -500,7 +503,7 @@ main {
     -webkit-font-smoothing: antialiased !important;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h3, h4, h6 {
     font-family: "Open Sans", sans-serif !important;
     color: #000 !important;
     font-weight: 400 !important;
@@ -512,8 +515,15 @@ main {
   }
 
   h2 {
-    font-size: 48px !important;
+    font-size: 38px !important;
   }
+
+  h2.header-text {
+    width: 70%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
+
 
   h3 {
     font-size: 36px !important;
@@ -525,6 +535,12 @@ main {
 
   h5 {
     font-size: 20px !important;
+  }
+
+  h5.desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #000;
   }
 
   h6 {
