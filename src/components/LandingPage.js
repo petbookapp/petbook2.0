@@ -1,5 +1,5 @@
 import iphoneBanner from "./assets/images/phones/iphone-banner.png";
-import iphoneFeature from "./assets/images/phones/iphone-feature.png";
+import iphoneFeature from "./assets/images/phones/phone_app.gif";
 import iphoneScreen from "./assets/images/phones/i-phone-screen.png";
 import googleplay from "./assets/images/googleplay.svg"
 import applestore from "./assets/images/applestore.svg"
@@ -111,8 +111,7 @@ export default function LandingPage(){
                                     </div>
                                     <div class="content">
                                         <h5>Creative Design</h5>
-                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
-                                            and I will give you a complete accounta</p>
+                                        <p>A nice refreshing design created by our mobile team</p>
                                     </div>
                                 </div>
                                 
@@ -122,8 +121,7 @@ export default function LandingPage(){
                                     </div>
                                     <div class="content">
                                         <h5>Easy to Use</h5>
-                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
-                                            and I will give you a complete accounta</p>
+                                        <p>Our intuitive design makes usage of the app easy to use</p>
                                     </div>
                                 </div>
                                 
@@ -133,8 +131,7 @@ export default function LandingPage(){
                                     </div>
                                     <div class="content">
                                         <h5>Best User Experience</h5>
-                                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
-                                            and I will give you a complete accounta</p>
+                                        <p>Manage your pets in a clean and simple way</p>
                                     </div>
                                 </div>
                             </div>
@@ -151,8 +148,6 @@ export default function LandingPage(){
                         <div class="col-12">
                             <div class="section-title">
                                 <h2>App Features</h2>
-                                <p>Demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee idea of
-                                    denouncing pleasure and praising</p>
                             </div>
                         </div>
                     </div>
@@ -165,8 +160,8 @@ export default function LandingPage(){
                                     <i class="ti-brush-alt"></i>
                                 </div>
                                 <div class="content">
-                                    <h5>Beautiful Interface Design</h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
+                                    <h5>Pet Timelines</h5>
+                                    <p>Create and save a timeline of your pet, storing memories of you and your pet.</p>
                                 </div>
                             </div>
                             
@@ -176,8 +171,8 @@ export default function LandingPage(){
                                 </div>
             
                                 <div class="content">
-                                    <h5>Unlimited Features</h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
+                                    <h5>Pet Profiles</h5>
+                                    <p>Create profiles for all your pets</p>
                                 </div>
                             </div>
                         </div>
@@ -187,11 +182,6 @@ export default function LandingPage(){
                                 <div class="icon">
                                     <i class="ti-comments"></i>
                                 </div>
-            
-                                <div class="content">
-                                    <h5>Full free chat</h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
-                                </div>
                             </div>
                             <div class="app-screen">
                                 <img class="img-fluid" src={iphoneScreen} alt="app-screen"/>
@@ -200,11 +190,6 @@ export default function LandingPage(){
                             <div class="feature-item">
                                 <div class="icon">
                                     <i class="ti-support"></i>
-                                </div>
-            
-                                <div class="content">
-                                    <h5>24/7 support by real people</h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
                                 </div>
                             </div>
                         </div>
@@ -217,8 +202,8 @@ export default function LandingPage(){
                                 </div>
                         
                                 <div class="content">
-                                    <h5>Retina ready greaphics</h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
+                                    <h5>QR Support</h5>
+                                    <p>Access pet profiles via QR codes. Share them or even put it onto a collar.</p>
                                 </div>
                             </div>
                             
@@ -229,7 +214,7 @@ export default function LandingPage(){
             
                                 <div class="content">
                                     <h5>IOS and android version </h5>
-                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising</p>
+                                    <p>Download on either Google play or Apple app store (Mentira -Leo)</p>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +227,7 @@ export default function LandingPage(){
                 <div class="row">
                     <div class="col-lg-6 mr-auto">
                     <div class="footer-logo">
-                        <img style={{height: "75px", width: "150px"}} src="logo.png" alt="footer-logo"/>
+                        
                     </div>
                     <div class="copyright">
                         <p>@2022 PetBook Team All Rights Reserved | Design and Developed By : Group23</p>

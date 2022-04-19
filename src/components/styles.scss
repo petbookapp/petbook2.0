@@ -35,7 +35,7 @@ html {
 }
 
 .right-margin {
-  margin-left: 285px;
+  margin-left: 500px;
 }
 
 .left-margin {
@@ -661,7 +661,7 @@ main {
   }
 
   .bg-1 {
-    background: url("background.png") no-repeat !important;
+    background: url("background.png") center no-repeat !important;
     background-size: cover !important;
   }
 
@@ -948,11 +948,6 @@ main {
     padding: 13px 50px !important;
   }
 
-  .main-nav {
-    background: #776bd5 !important;
-    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1) !important;
-  }
-
   .main-nav .navbar-brand {
     padding: 0 !important;
   }
@@ -984,7 +979,9 @@ main {
     text-align: center !important;
     font-size: 13px !important;
     text-transform: uppercase !important;
-    color: #fff !important;
+    font-weight: bold;
+    color: rgb(0, 0, 0) !important;
+    margin-left: 15px;
     padding-left: 15px !important;
     padding-right: 15px !important;
   }
@@ -1005,7 +1002,7 @@ main {
 
   .footer-main {
     padding: 50px 0 !important;
-    background: #7d71d3 !important;
+    background: #3A405A !important;
   }
 
   @media (max-width: 768px) {
@@ -1019,6 +1016,7 @@ main {
   }
 
   .footer-main .copyright {
+    margin-top: 50px;
     opacity: .7 !important;
   }
 
@@ -1430,7 +1428,8 @@ main {
 
   .feature .app-screen img {
     max-height: 400px !important;
-  }n
+    border: 2px solid #000000
+  }
 
   .screenshots {
     overflow: hidden !important;
