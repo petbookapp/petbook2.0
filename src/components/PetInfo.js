@@ -12,11 +12,17 @@ import EditPet from "./EditPet"
 export default function PetInfo() {
   const { logout } = useAuth()
   const navigate = useNavigate()
-  const [pet, setPet] = useState("")
+  const [showDelete, setShowDelete] = useState(false)
   const [Name, setName] = useState("")
+  const [petName, setpetName] = useState("")
+  const [petGender, setGender] = useState("")
+  const [petWeight, setWeight] = useState("")
+  const [petBreed, setBreed] = useState("")
+  const [petType, setType] = useState("")
+  const [petAge, setAge] = useState("")
+  const [petPhoto, setPhoto] = useState("")
   const [Phone, setPhone] = useState("")
   const [show, setShow] = useState(false)
-  const [showDelete, setShowDelete] = useState(false)
   let { id } = useParams()
   
   useEffect(() => {
@@ -32,8 +38,9 @@ export default function PetInfo() {
       
       userData.push({...snapshot.data()})
 
-      setName(userData[0]["display_name"])
-      setPhone(userData[0]["phone_number"])
+
+      setName(snapshot.data().display_name)
+      setPhone(snapshot.data().phone_number)
       
     } catch {
       console.log("No such document!");
@@ -41,18 +48,26 @@ export default function PetInfo() {
   }
 
   async function getPet(id) {
-    let petData = []
+    
     try {
       const docRef = doc(database, "pets", id);
       const snapshot = await getDoc(docRef)
+      console.log(snapshot.data().petName)
       
-      petData.push({...snapshot.data()})
-      setPet(petData)
+      setpetName(snapshot.data().petName);
+      setGender(snapshot.data().petGender);
+      setWeight(snapshot.data().petWeight);
+      setType(snapshot.data().petType);
+      setBreed(snapshot.data().petBreed);
+      setAge(snapshot.data().petAge);
+      setPhoto(snapshot.data().petPhoto);
+      
       
     } catch {
       console.log("No such document!");
     }
   }
+
   async function deletePet() {
     try{
       const docRef = doc(database, "pets", id)
@@ -65,6 +80,7 @@ export default function PetInfo() {
 
     }
   }
+
   async function handleLogout() {
     try {
       await logout()
@@ -107,13 +123,11 @@ export default function PetInfo() {
           <h2 style={{ fontSize: 25 }} className="text-center mb-4">
                 <img className="logo center-margin4" src="/logo.png" alt="logo"/>
             </h2>
-          {Object.keys(pet).map((key) => (
-              <>
                 <div class="team-single center-margin3">
                     <div class="row">
                         <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
                             <div class="team-single-img">
-                                <img src={pet[key]["petPhoto"]} alt="MyPet"/>
+                                <img src={petPhoto} alt="MyPet"/>
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-7">
@@ -141,7 +155,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-orange">Name:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petName"]} </p>
+                                                    <p>{petName} </p>
                                                 </div>
                                             </div>
 
@@ -154,7 +168,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-purple">Type:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petType"]}</p>
+                                                    <p>{petType}</p>
                                                 </div>
                                             </div>
 
@@ -167,7 +181,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-green">Breed:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petBreed"]}</p>
+                                                    <p>{petBreed}</p>
                                                 </div>
                                             </div>
 
@@ -180,7 +194,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-pink">Age:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petAge"]}</p>
+                                                    <p>{petAge}</p>
                                                 </div>
                                             </div>
 
@@ -192,7 +206,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-lightred">Gender:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petGender"]}</p>
+                                                    <p>{petGender}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -203,7 +217,7 @@ export default function PetInfo() {
                                                     <strong class="margin-10px-left text-purple">Weight:</strong>
                                                 </div>
                                                 <div class="col-md-7 col-7">
-                                                    <p>{pet[key]["petWeight"]}</p>
+                                                    <p>{petWeight}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -262,8 +276,6 @@ export default function PetInfo() {
                   <Button className="btn btn-dark" onClick={closeDelete}>Cancel</Button><Button onClick={deletePet} className="btn-danger">Yes</Button>
                   </Modal.Footer>
                 </Modal>
-                </>
-            ))}
       </div>
     </>
   )

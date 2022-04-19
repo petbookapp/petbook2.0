@@ -70,7 +70,6 @@
   "bugs": {
     "url": "https://github.com/RobertUriarte/petbook2.0/issues"
   },
-  "homepage": ".",
   "devDependencies": {
     "sass": "^1.49.10"
   }
