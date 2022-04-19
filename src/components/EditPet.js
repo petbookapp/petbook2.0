@@ -75,10 +75,15 @@ export default function AddPet(){
                             </div>
                             <div className= "w-100 text-center mt-2"></div>
                             <div class="form-group">
-                                <label for="petAge">Type of Pet
-                                <div className= "w-100 text-center mt-2"></div>
-                                </label>
-                                <input id="petType" type="petType" class="form-control" name="petType" required data-eye/>
+                            <label for="petType" required data-eye>Choose a pet:</label>
+                                    <select name="petType" id="petType">
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="Dog">Dog</option>
+                                    <option value="Cat">Cat</option>
+                                    <option value="Bird">Bird</option>
+                                    <option value="Rabbit">Rabbit</option>
+                                    <option value="Lizard">Lizard</option>
+                                    </select>
                             </div>
                             <div className= "w-100 text-center mt-2"></div>
                             <div class="form-group">
