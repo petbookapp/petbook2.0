@@ -80,9 +80,6 @@ export default function AddPet(){
                                     <option value="">--Please choose an option--</option>
                                     <option value="Dog">Dog</option>
                                     <option value="Cat">Cat</option>
-                                    <option value="Bird">Bird</option>
-                                    <option value="Rabbit">Rabbit</option>
-                                    <option value="Lizard">Lizard</option>
                                     </select>
                             </div>
                             <div className= "w-100 text-center mt-2"></div>
